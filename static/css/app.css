@@ -1,0 +1,41 @@
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  color: #1f2937;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #1e3a5f;
+  color: #fff;
+}
+
+.site-header a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+form button,
+button {
+  cursor: pointer;
+  padding: 0.4rem 0.9rem;
+}
+
+.error {
+  color: #b91c1c;
+}

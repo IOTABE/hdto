@@ -58,3 +58,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.full_name
+
+    @property
+    def role(self):
+        from .roles import Role
+
+        names = set(self.groups.values_list("name", flat=True))
+        for role in Role:
+            if role.value in names:
+                return role
+        return None
+
+    def has_role(self, *roles):
+        from .permissions import user_has_role
+
+        return user_has_role(self, *roles)
