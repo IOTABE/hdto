@@ -163,7 +163,7 @@ addopts = "--cov=apps --cov-report=term-missing"
 ### Dependências de sistema para GeoDjango
 
 - **Dev (host Linux):** `libgdal-dev libgeos-dev libproj-dev libsqlite3-mod-spatialite`
-- **Imagem Docker:** mesmas libs em runtime (`gdal-bin libgeos-c1v5 libproj25 libpq5`).
+- **Imagem Docker:** mesmas libs em runtime (`libgdal36 libgeos-c1t64 libproj25 libpq5`).
 
 ---
 
@@ -409,7 +409,7 @@ Implementação:
 `Dockerfile` (multi-stage com uv):
 
 ```dockerfile
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+FROM ghcr.io/astral-sh/uv:python3.12-trixie-slim AS builder
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
@@ -417,9 +417,9 @@ RUN uv sync --frozen --no-dev --no-install-project
 COPY . .
 RUN uv sync --frozen --no-dev
 
-FROM python:3.12-slim
+FROM python:3.12-slim-trixie
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq5 gdal-bin libgeos-c1v5 libproj25 libsqlite3-mod-spatialite \
+    libgdal36 libgeos-c1t64 libproj25 libpq5 curl \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=builder /app /app

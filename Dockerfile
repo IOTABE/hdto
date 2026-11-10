@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+FROM ghcr.io/astral-sh/uv:python3.12-trixie-slim AS builder
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy
@@ -9,10 +9,10 @@ RUN uv sync --frozen --no-dev --no-install-project
 COPY . .
 RUN uv sync --frozen --no-dev
 
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-trixie
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgdal32 libgeos-c1v5 libproj25 libpq5 curl \
+    libgdal36 libgeos-c1t64 libproj25 libpq5 curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
