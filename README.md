@@ -25,7 +25,7 @@ apps/
   content/       páginas, notícias e galerias
   core/          base, criptografia, validadores, middleware
 config/settings/ base, dev e prod
-docs/            PRD, plano e runbook
+docs/            PRD, plano, runbook e manual de personas
 ```
 
 ## Desenvolvimento
