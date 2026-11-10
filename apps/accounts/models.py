@@ -38,6 +38,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField("equipe", default=False)
     date_joined = models.DateTimeField("cadastrado em", default=timezone.now)
     last_login = models.DateTimeField("último acesso", null=True, blank=True)
+    associacao = models.ForeignKey(
+        "institutions.AssociacaoRegional",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="usuarios",
+        verbose_name="associação regional",
+    )
+    igreja = models.ForeignKey(
+        "institutions.Igreja",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="usuarios",
+        verbose_name="igreja",
+    )
 
     objects = UserManager()
 

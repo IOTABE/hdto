@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "django_filters",
     "apps.core",
     "apps.accounts",
+    "apps.geo",
+    "apps.institutions",
 ]
 
 MIDDLEWARE = [
