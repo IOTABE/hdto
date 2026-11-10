@@ -44,7 +44,7 @@ DB_SSLMODE=prefer
 CENSO_K_ANONIMATO=5
 ```
 
-Ajustar o domínio em `Caddyfile`.
+Configurar o proxy reverso no Nginx do host apontando para `127.0.0.1:8006` (exemplo na seção 3).
 
 Gerar chaves:
 
@@ -59,7 +59,37 @@ uv run python -c "import secrets; print(secrets.token_urlsafe(48))"
 ./scripts/deploy.sh
 ```
 
-O script constrói a imagem, aplica migrações, coleta estáticos e sobe `web` + `caddy`.
+O script constrói a imagem, aplica migrações, coleta estáticos e sobe apenas o serviço `web` (removendo containers órfãos). O app fica acessível em `127.0.0.1:8006`.
+
+Exemplo de bloco Nginx (proxy reverso + TLS via Certbot):
+
+```nginx
+server {
+    listen 80;
+    server_name hdto.exemplo.org.br;
+    location / { return 301 https://$host$request_uri; }
+}
+
+server {
+    listen 443 ssl;
+    server_name hdto.exemplo.org.br;
+
+    ssl_certificate     /etc/letsencrypt/live/hdto.exemplo.org.br/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/hdto.exemplo.org.br/privkey.pem;
+
+    client_max_body_size 10m;
+
+    location / {
+        proxy_pass http://127.0.0.1:8006;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Após alterar o Nginx: `sudo nginx -t && sudo systemctl reload nginx`. O deploy pode recarregar automaticamente com `RELOAD_NGINX=1 ./scripts/deploy.sh`.
 
 Verificações:
 
@@ -122,7 +152,7 @@ git pull
 
 | Sintoma | Causa provável | Ação |
 |---|---|---|
-| `502` no Caddy | app não subiu | logs do `web`; checar `.env` |
+| `502` no Nginx | app não subiu | logs do `web`; checar `.env` |
 | `could not connect to server` | Postgres/porta 5434 | testar `pg_isready -h VPS -p 5434`; `pg_hba.conf` |
 | `GDAL not found` | imagem sem libs | rebuild da imagem |
 | `FIELD_ENCRYPTION_KEY obrigatória` | variável ausente | preencher `.env` e reiniciar |
@@ -131,7 +161,7 @@ git pull
 
 ## 8. Segurança
 
-- TLS 1.3/HSTS via Caddy + settings de produção.
+- TLS 1.3/HSTS via Nginx + settings de produção.
 - CSP e `X-Frame-Options: DENY`.
 - Argon2id para senhas.
 - CPF cifrado e hash HMAC.

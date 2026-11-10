@@ -68,7 +68,7 @@ Antes de codificar, validar:
   CREATE EXTENSION IF NOT EXISTS pg_trgm;
   ```
 - [ ] Confirmar se o Postgres aceita conexões do container Docker (bind em `0.0.0.0` ou bridge, `pg_hba.conf`) e liberar firewall apenas para a rede do Docker/VPS.
-- [ ] Definir domínio e TLS (Caddy/Nginx + Let's Encrypt).
+- [ ] Definir domínio e TLS (Nginx + Let's Encrypt).
 - [ ] Obter a lista oficial das **associações regionais** da CBT e os dados base.
 - [ ] Baixar malha municipal do TO (139 municípios) do IBGE (GeoJSON/Shapefile).
 
@@ -89,7 +89,6 @@ hdto/
 ├── Dockerfile
 ├── docker-compose.yml           # dev (SQLite)
 ├── docker-compose.prod.yml      # prod (Postgres externo 5434)
-├── Caddyfile
 ├── config/
 │   ├── asgi.py / wsgi.py
 │   ├── urls.py
@@ -388,7 +387,7 @@ Implementação:
 - **OWASP:** CSRF, XSS (escape de templates), SQLi (ORM), upload validado (tipo/tamanho), rate limit em login/autocadastro, CSP (`django-csp`), HSTS, cookies seguros.
 - **Senhas:** Argon2id.
 - **Auditoria:** log de ações administrativas e acessos a dados sensíveis.
-- **TLS 1.3** terminado no Caddy/Nginx.
+- **TLS 1.3** terminado no Nginx.
 
 ---
 
@@ -442,36 +441,29 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - media:/app/media
-    expose:
-      - "8006"
+    ports:
+      - "127.0.0.1:8006:8006"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8006/health/')"]
       interval: 30s
       timeout: 5s
       retries: 3
 
-  caddy:
-    image: caddy:2
-    restart: unless-stopped
-    ports: ["80:80", "443:443"]
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on: [web]
-
 volumes:
   media:
-  caddy_data:
-  caddy_config:
 ```
 
-`Caddyfile`:
+Proxy reverso no Nginx do host (TLS via Certbot), apontando para `127.0.0.1:8006`:
 
-```caddy
-hdto.exemplo.org.br {
-    encode zstd gzip
-    reverse_proxy web:8006
+```nginx
+server {
+    listen 443 ssl;
+    server_name hdto.exemplo.org.br;
+    location / {
+        proxy_pass http://127.0.0.1:8006;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
 }
 ```
 
@@ -585,7 +577,7 @@ Checklist de produção:
 **DoD:** checklist de segurança assinado; todos os CTs verdes.
 
 ### Fase 10 — Deploy e operação (1 semana)
-- Compose prod, Caddy/TLS, migrations, backup, monitoramento.
+- Compose prod, Nginx/TLS, migrations, backup, monitoramento.
 - Runbook, treinamento e go-live.
 
 **DoD:** ambiente produtivo no ar, backup e restore validados.

@@ -3,19 +3,28 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+COMPOSE="docker compose -f docker-compose.prod.yml"
+
 echo "==> Construindo imagem"
-docker compose -f docker-compose.prod.yml build
+$COMPOSE build web
 
 echo "==> Aplicando migrações"
-docker compose -f docker-compose.prod.yml run --rm -e RUN_MIGRATIONS=0 web \
+$COMPOSE run --rm -e RUN_MIGRATIONS=0 web \
   python manage.py migrate --noinput
 
 echo "==> Coletando estáticos"
-docker compose -f docker-compose.prod.yml run --rm -e RUN_MIGRATIONS=0 web \
+$COMPOSE run --rm -e RUN_MIGRATIONS=0 web \
   python manage.py collectstatic --noinput
 
-echo "==> Subindo serviços"
-docker compose -f docker-compose.prod.yml up -d
+echo "==> Subindo aplicação"
+# --remove-orphans remove containers antigos (ex.: caddy) que saíram do compose.
+$COMPOSE up -d --remove-orphans web
+
+if [ "${RELOAD_NGINX:-0}" = "1" ]; then
+  echo "==> Recarregando Nginx"
+  sudo nginx -t
+  sudo systemctl reload nginx
+fi
 
 echo "==> Status"
-docker compose -f docker-compose.prod.yml ps
+$COMPOSE ps

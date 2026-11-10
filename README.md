@@ -8,7 +8,7 @@ Aplicação Django para a UMHB-TO/CBT: portal institucional, cadastro hierárqui
 - Django 5.2 LTS + Django REST Framework
 - **SQLite + SpatiaLite** em desenvolvimento
 - **PostgreSQL + PostGIS** em produção (porta 5434)
-- Docker para o app; Caddy para TLS
+- Docker para o app; Nginx no host para proxy reverso/TLS
 - Templates + Leaflet + Chart.js (sem SPA)
 
 ## Estrutura
