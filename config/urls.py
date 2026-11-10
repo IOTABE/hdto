@@ -7,5 +7,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("contas/", include("apps.accounts.urls")),
     path("api/", include("apps.dashboard.urls")),
+    path("api/mapa/", include("apps.geo.urls")),
     path("health/", health, name="health"),
 ]
