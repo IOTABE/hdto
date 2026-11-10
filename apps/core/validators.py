@@ -29,3 +29,21 @@ def validate_cnpj(value):
 
 def normalize_cnpj(value):
     return only_digits(value)
+
+
+def validate_cpf(value):
+    digits = only_digits(value)
+    if len(digits) != 11:
+        raise ValidationError("CPF deve conter 11 dígitos.")
+    if len(set(digits)) == 1:
+        raise ValidationError("CPF inválido.")
+    for position in (9, 10):
+        total = sum(int(digit) * weight for digit, weight in zip(digits[:position], range(position + 1, 1, -1), strict=True))
+        remainder = (total * 10) % 11
+        expected = "0" if remainder == 10 else str(remainder)
+        if digits[position] != expected:
+            raise ValidationError("CPF inválido.")
+
+
+def normalize_cpf(value):
+    return only_digits(value)

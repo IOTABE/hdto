@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.geo",
     "apps.institutions",
+    "apps.members",
 ]
 
 MIDDLEWARE = [
