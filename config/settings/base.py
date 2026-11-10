@@ -109,6 +109,11 @@ STORAGES = {
 FIELD_ENCRYPTION_KEY = env("FIELD_ENCRYPTION_KEY", default="")
 CPF_HASH_PEPPER = env("CPF_HASH_PEPPER", default="dev-pepper")
 
+# Necessário apenas quando as bibliotecas nativas estão fora do caminho padrão
+# (no Docker não é preciso configurar).
+GDAL_LIBRARY_PATH = env("GDAL_LIBRARY_PATH", default="") or None
+GEOS_LIBRARY_PATH = env("GEOS_LIBRARY_PATH", default="") or None
+
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "same-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"

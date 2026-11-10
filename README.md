@@ -45,6 +45,29 @@ Acesse http://localhost:8000. O comando do compose roda `migrate` e `runserver`.
 
 > O host precisa das bibliotecas GDAL/GEOS/PROJ/SpatiaLite para rodar `uv run` diretamente. A imagem `Dockerfile.dev` já as inclui — por isso o fluxo padrão é via Docker.
 
+### Erro `Could not find the GDAL library`
+
+Isso acontece ao rodar `uv run manage.py` no host sem as bibliotecas nativas. Escolha uma opção:
+
+**Opção A — Docker (recomendada, sem alterar o sistema):**
+```bash
+cp -n .env.example .env
+# gere e preencha FIELD_ENCRYPTION_KEY no .env
+docker compose up --build
+```
+
+**Opção B — instalar no host (Arch/Manjaro/BigLinux):**
+```bash
+sudo pacman -S --needed gdal geos proj libspatialite
+gdal-config --version
+```
+Se ainda não localizar, preencha no `.env`:
+```env
+GDAL_LIBRARY_PATH=/usr/lib/libgdal.so
+GEOS_LIBRARY_PATH=/usr/lib/libgeos_c.so
+SPATIALITE_LIBRARY_PATH=/usr/lib/mod_spatialite.so
+```
+
 ### Testes e lint
 
 ```bash

@@ -9,7 +9,7 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",  # noqa: F405
     }
 }
-SPATIALITE_LIBRARY_PATH = "mod_spatialite"
+SPATIALITE_LIBRARY_PATH = env("SPATIALITE_LIBRARY_PATH", default="mod_spatialite")  # noqa: F405
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
