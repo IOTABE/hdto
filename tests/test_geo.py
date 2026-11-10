@@ -1,4 +1,6 @@
+import io
 import json
+from unittest.mock import patch
 
 import pytest
 from django.contrib.gis.geos import Point
@@ -106,6 +108,44 @@ def test_importar_municipios_geojson(tmp_path):
     assert municipio.nome == "Palmas"
     assert municipio.geom is not None
     assert municipio.geom.srid == 4326
+
+
+@pytest.mark.django_db
+def test_importar_municipios_busca_nome_no_ibge(tmp_path):
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {"codarea": "1721000"},
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [-48.4, -10.3],
+                            [-48.2, -10.3],
+                            [-48.2, -10.1],
+                            [-48.4, -10.1],
+                            [-48.4, -10.3],
+                        ]
+                    ],
+                },
+            }
+        ],
+    }
+    arquivo = tmp_path / "municipios.geojson"
+    arquivo.write_text(json.dumps(geojson), encoding="utf-8")
+
+    localidades = io.BytesIO(
+        json.dumps([{"id": 1721000, "nome": "Palmas"}]).encode("utf-8")
+    )
+    with patch(
+        "apps.geo.management.commands.importar_municipios_to.urlopen",
+        return_value=localidades,
+    ):
+        call_command("importar_municipios_to", arquivo=str(arquivo))
+
+    assert Municipio.objects.get(codigo_ibge="1721000").nome == "Palmas"
 
 
 @pytest.mark.django_db
