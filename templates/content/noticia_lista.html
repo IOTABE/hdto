@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Notícias — HDTO{% endblock %}
+{% block content %}
+  <h1>Notícias</h1>
+  <ul class="card-list">
+    {% for noticia in noticias %}
+      <li>
+        <a href="{% url 'noticia-detalhe' noticia.slug %}">{{ noticia.titulo }}</a>
+        <span>{{ noticia.publicada_em|date:"d/m/Y" }}</span>
+        <p>{{ noticia.resumo }}</p>
+      </li>
+    {% empty %}
+      <li>Nenhuma notícia publicada.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

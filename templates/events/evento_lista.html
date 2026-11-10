@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Eventos — HDTO{% endblock %}
+{% block content %}
+  <h1>Eventos</h1>
+  <ul class="card-list">
+    {% for evento in eventos %}
+      <li>
+        <a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a>
+        <span>{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} — {{ evento.local_nome }}{% endif %}</span>
+      </li>
+    {% empty %}
+      <li>Nenhum evento programado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

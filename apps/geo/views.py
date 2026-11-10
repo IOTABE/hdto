@@ -1,6 +1,7 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 
-from .services import municipios_geojson, pontos_do_mapa
+from .services import municipios_geojson, pontos_do_mapa, tipos_organizacao
 
 
 def _int_param(request, name):
@@ -36,3 +37,7 @@ def pontos(request):
 
 def municipios(request):
     return JsonResponse(municipios_geojson())
+
+
+def mapa(request):
+    return render(request, "geo/mapa.html", {"tipos": tipos_organizacao()})

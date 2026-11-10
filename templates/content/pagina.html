@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ pagina.titulo }} — HDTO{% endblock %}
+{% block meta_description %}{{ pagina.resumo }}{% endblock %}
+{% block content %}
+  <article>
+    <h1>{{ pagina.titulo }}</h1>
+    {% if pagina.resumo %}<p class="lead">{{ pagina.resumo }}</p>{% endif %}
+    <div class="prose">{{ pagina.conteudo|linebreaks }}</div>
+  </article>
+{% endblock %}

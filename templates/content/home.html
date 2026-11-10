@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Homens Batistas do Tocantins{% endblock %}
+{% block content %}
+  <section class="hero">
+    <h1>Homens transformados em discípulos integrais</h1>
+    <p>Mobilizando homens, rapazes e meninos para servir a Cristo, à família, à igreja e à sociedade.</p>
+  </section>
+
+  <section>
+    <h2>Próximos eventos</h2>
+    <ul class="card-list">
+      {% for evento in proximos_eventos %}
+        <li>
+          <a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a>
+          <span>{{ evento.inicio|date:"d/m/Y H:i" }} — {{ evento.local_nome }}</span>
+        </li>
+      {% empty %}
+        <li>Nenhum evento programado.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Notícias</h2>
+    <ul class="card-list">
+      {% for noticia in noticias %}
+        <li>
+          <a href="{% url 'noticia-detalhe' noticia.slug %}">{{ noticia.titulo }}</a>
+          <p>{{ noticia.resumo }}</p>
+        </li>
+      {% empty %}
+        <li>Nenhuma notícia publicada.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Organizações</h2>
+    <ul class="card-list">
+      {% for pagina in paginas %}
+        <li><a href="{% url 'pagina' pagina.slug %}">{{ pagina.titulo }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

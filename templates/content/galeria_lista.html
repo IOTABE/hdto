@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Galerias — HDTO{% endblock %}
+{% block content %}
+  <h1>Galerias</h1>
+  <ul class="card-list">
+    {% for galeria in galerias %}
+      <li>
+        <a href="{% url 'galeria-detalhe' galeria.slug %}">{{ galeria.titulo }}</a>
+        <p>{{ galeria.descricao }}</p>
+      </li>
+    {% empty %}
+      <li>Nenhuma galeria publicada.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ evento.titulo }} — HDTO{% endblock %}
+{% block meta_description %}{{ evento.descricao|truncatechars:160 }}{% endblock %}
+{% block content %}
+  <article>
+    <h1>{{ evento.titulo }}</h1>
+    <p class="meta">
+      {{ evento.inicio|date:"d/m/Y H:i" }} a {{ evento.fim|date:"d/m/Y H:i" }}
+      {% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}
+    </p>
+    {% if evento.banner %}<img src="{{ evento.banner.url }}" alt="{{ evento.titulo }}" loading="lazy">{% endif %}
+    <div class="prose">{{ evento.descricao|linebreaks }}</div>
+    <p>
+      <a href="{% url 'evento-ics' evento.pk %}">Adicionar à agenda (.ics)</a>
+    </p>
+  </article>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ galeria.titulo }} — HDTO{% endblock %}
+{% block meta_description %}{{ galeria.descricao }}{% endblock %}
+{% block content %}
+  <h1>{{ galeria.titulo }}</h1>
+  <p>{{ galeria.descricao }}</p>
+  <div class="galeria">
+    {% for foto in fotos %}
+      <figure>
+        <img src="{{ foto.imagem.url }}" alt="{{ foto.legenda }}" loading="lazy">
+        {% if foto.legenda %}<figcaption>{{ foto.legenda }}</figcaption>{% endif %}
+      </figure>
+    {% empty %}
+      <p>Nenhuma foto nesta galeria.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

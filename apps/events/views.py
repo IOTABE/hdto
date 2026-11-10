@@ -4,7 +4,7 @@ import qrcode
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -13,6 +13,16 @@ from apps.accounts.permissions import role_required
 from apps.accounts.roles import Role
 
 from .models import Evento, Inscricao
+
+
+def evento_lista(request):
+    eventos = Evento.objects.filter(fim__gte=timezone.now()).order_by("inicio")
+    return render(request, "events/evento_lista.html", {"eventos": eventos})
+
+
+def evento_detalhe(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    return render(request, "events/evento_detalhe.html", {"evento": evento})
 
 
 def _ics_escape(valor):
