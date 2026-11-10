@@ -1,7 +1,7 @@
 class ContentSecurityPolicyMiddleware:
     POLICY = (
         "default-src 'self'; "
-        "img-src 'self' data: https://*.tile.openstreetmap.org; "
+        "img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org; "
         "script-src 'self' https://unpkg.com; "
         "style-src 'self' 'unsafe-inline' https://unpkg.com; "
         "connect-src 'self'; "

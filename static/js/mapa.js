@@ -5,9 +5,10 @@
   const status = document.getElementById("mapa-status");
   const map = L.map(element).setView([-10.18, -48.33], 7);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: "&copy; OpenStreetMap",
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contribuidores',
   }).addTo(map);
 
   const cluster = L.markerClusterGroup();
