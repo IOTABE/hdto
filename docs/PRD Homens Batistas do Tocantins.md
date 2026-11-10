@@ -3,7 +3,7 @@
 ## **Fundamentação Doutrinária, Histórica e Estratégia de Produto**
 
 A União Missionária de Homens Batistas do Brasil (UMHBB), constituída historicamente como órgão auxiliar da Convenção Batista Brasileira (CBB), atua como polo catalisador da mobilização do contingente masculino nas igrejas locais. A atuação da organização é pautada por uma visão de homens transformados em discípulos integrais de Jesus Cristo, capacitados para responder com presteza às demandas de suas famílias, igrejas e da sociedade circundante. Na eclesiologia batista, a autoridade e a autonomia residem na congregação local, a qual se une de maneira cooperativa em associações regionais, convenções estaduais e na convenção nacional. No território tocantinense, essa articulação é coordenada pela Convenção Batista do Tocantins (CBT), enfrentando desafios de integração decorrentes da extensão geográfica do estado e da dispersão dos municípios entre os polos regionais.  
-O trabalho masculino estrutura-se de forma tripartite no seio das igrejas locais, abrangendo diferentes faixas do desenvolvimento humano: a organização dos Embaixadores do Rei (ER), dedicada a meninos e adolescentes de 9 a 17 anos sob o lema de formar o caráter cristão na juventude; o Grupo de Ação Missionária (GAM), congregando jovens e rapazes para frentes evangelísticas dinâmicas; e a Sociedade Missionária de Homens Batistas (SMHB), canal de engajamento para homens adultos no sacerdócio do lar e em ministérios de socorro comunitário. Historicamente, a administração dessas frentes no estado do Tocantins esteve sujeita a registros fragmentados, comunicações descentralizadas e ausência de uma base cadastral georreferenciada unificada.  
+O trabalho masculino estrutura-se de forma tripartite no seio das igrejas locais, abrangendo diferentes faixas do desenvolvimento humano: a organização dos Embaixadores do Rei (ER), dedicada a meninos e adolescentes de 9 a 17 anos sob o lema de formar o caráter cristão na juventude; o Grupo de Ação Missionária (ERV), congregando jovens e rapazes para frentes evangelísticas dinâmicas; e a Sociedade Missionária de Homens Batistas (HD), canal de engajamento para homens adultos no sacerdócio do lar e em ministérios de socorro comunitário. Historicamente, a administração dessas frentes no estado do Tocantins esteve sujeita a registros fragmentados, comunicações descentralizadas e ausência de uma base cadastral georreferenciada unificada.  
 A presente solução tecnológica responde a essas lacunas mediante uma plataforma integrada em nuvem, concebida para atender à liderança estadual da CBT, aos coordenadores associacionais e aos conselheiros e diretores locais. O sistema unifica a divulgação institucional e doutrinária, consolida o calendário oficial de conclaves e eventos, viabiliza o cadastramento das organizações locais e organiza um censo demográfico analítico. Adicionalmente, integra uma camada de Sistemas de Informação Geográfica (GIS) com vistas a mapear e conectar cada congregação atuante nos 139 municípios tocantinenses.
 
 ## **Governança Federativa e Matriz de Controle de Acesso**
@@ -15,7 +15,7 @@ O Administrador Estadual detém a custódia geral da infraestrutura, gerenciando
 | :---- | :---- | :---- | :---- |
 | **Nível 1: Global** | Administrador Estadual (CBT / UMHB-TO) | Acesso irrestrito a todas as congregações e organizações do estado do Tocantins. | Homologação de cadastros de igrejas, governança do censo estadual, moderação do calendário oficial e auditoria de segurança. |
 | **Nível 2: Regional** | Coordenador de Associação Regional | Leitura analítica restrita aos municípios vinculados à respectiva associação. | Monitoramento de congregações ativas na região, proposição de eventos regionais e acompanhamento do engajamento censitário. |
-| **Nível 3: Local** | Diretor / Conselheiro da Organização Local | Leitura e escrita restrita aos dados da congregação e de suas organizações. | Ativação das organizações (SMHB, GAM, ER), cadastro de membros, validação presencial e envio de notificações locais. |
+| **Nível 3: Local** | Diretor / Conselheiro da Organização Local | Leitura e escrita restrita aos dados da congregação e de suas organizações. | Ativação das organizações (HD, ERV, ER), cadastro de membros, validação presencial e envio de notificações locais. |
 | **Nível 4: Individual** | Membro Efetivo / Responsável Legal | Acesso exclusivo ao perfil individual ou aos dependentes sob responsabilidade. | Autocadastro censitário, gestão de perfil pessoal, consentimento no tratamento de dados e inscrição em congressos. |
 
 ## **Especificação do Módulo Institucional e Difusão de Eventos**
@@ -33,7 +33,7 @@ A flexibilidade institucional permite que cada igreja local estabeleça uma, dua
 | Entidade do Modelo | Atributos Primários | Dependências Hierárquicas | Regras de Negócio e Validações |
 | :---- | :---- | :---- | :---- |
 | **Igreja / Congregação** | CNPJ, Razão Social, Nome Fantasia, Pastor Titular, Telefone, E-mail, Logradouro, Bairro, CEP, Município, Coordenadas Geográficas (Lat/Long). | Vinculada obrigatoriamente a uma Associação Regional da CBT. | Validação unívoca de CNPJ; congregações sem personalidade jurídica devem selecionar obrigatoriamente a respectiva Igreja-Mãe titular. |
-| **Organização Local** | Tipo de Organização (SMHB, GAM, ER), Data de Fundação Local, Nome do Líder/Conselheiro, Contato Telefônico, Dia e Horário das Reuniões Ordinárias. | Vinculada obrigatoriamente a uma entidade Igreja devidamente homologada. | Limite operacional de uma instância de cada tipo por congregação; exigência de credenciais ativas do conselheiro responsável. |
+| **Organização Local** | Tipo de Organização (HD, ERV, ER), Data de Fundação Local, Nome do Líder/Conselheiro, Contato Telefônico, Dia e Horário das Reuniões Ordinárias. | Vinculada obrigatoriamente a uma entidade Igreja devidamente homologada. | Limite operacional de uma instância de cada tipo por congregação; exigência de credenciais ativas do conselheiro responsável. |
 | **Membro / Integrante** | Nome Completo, CPF, Data de Nascimento, Estado Civil, Profissão, Talentos Vocacionais, E-mail, Telefone, Endereço Residencial. | Vinculado obrigatoriamente a pelo menos uma Organização Local ativa. | Verificação de unicidade cadastral por CPF; exigência de vinculação a responsável legal caso a idade seja inferior a 18 anos. |
 | **Consentimento Legal** | Identificador de Membro, Identificador do Responsável (se menor), IP de Origem, Registro Cronológico (Timestamp), Versão do Termo Aceito. | Dependente do registro de um Membro no banco censitário. | Imutabilidade do registro de auditoria (*append-only log*); bloqueio de ativação do perfil enquanto o consentimento não for concluído. |
 
@@ -44,11 +44,11 @@ O painel de inteligência de dados consolida as variáveis coletadas em uma inte
 
 | Indicador Estratégico | Parâmetros de Composição | Finalidade Prática no Planejamento |
 | :---- | :---- | :---- |
-| **Censo Geral Consolidado** | Contagem total de membros ativos validados, com segregação por organização (SMHB, GAM, ER). | Acompanhamento do crescimento global do trabalho masculino batista no Tocantins. |
+| **Censo Geral Consolidado** | Contagem total de membros ativos validados, com segregação por organização (HD, ERV, ER). | Acompanhamento do crescimento global do trabalho masculino batista no Tocantins. |
 | **Pirâmide Demográfica Eclesiástica** | Distribuição proporcional por faixas: 9–11 anos, 12–17 anos, 18–29 anos, 30–59 anos e \\ge 60 anos. | Diagnóstico de renovação geracional e direcionamento de congressos pedagógicos e juvenis. |
 | **Índice de Cobertura Geográfica** | Percentual de municípios tocantinenses com organizações masculinas ativas sobre o total de 139 cidades. | Mapeamento de vazios demográficos e planejamento de plantação de novas frentes missionárias. |
 | **Banco Vocacional de Prontidão** | Agrupamento de voluntários catalogados por ofício (construção civil, saúde, logística, ensino). | Convocação imediata de forças-tarefa beneficentes para atendimento comunitário e emergencial. |
-| **Curva de Retenção e Transição** | Taxa de conversão de meninos dos Embaixadores do Rei para o GAM e destes para a SMHB. | Identificação de pontos de evasão durante a transição da adolescência para a maturidade masculina. |
+| **Curva de Retenção e Transição** | Taxa de conversão de meninos dos Embaixadores do Rei para o ERV e destes para a HD. | Identificação de pontos de evasão durante a transição da adolescência para a maturidade masculina. |
 
 ## **Infraestrutura Cartográfica e Georreferenciamento Territorial**
 
@@ -83,9 +83,9 @@ Os cenários de homologação validam o comportamento do software sob condiçõe
 
 | Identificador | Pré-condição Operacional | Ação Executada pelo Usuário | Resultado Esperado do Sistema |
 | :---- | :---- | :---- | :---- |
-| **CT-01** | Igreja cadastrada na CBT sem organização GAM associada. | Diretor local submete formulário ativando o Grupo de Ação Missionária. | O sistema persiste o GAM vinculado à igreja, disponibiliza a emissão de links censitários e atualiza o pin no mapa. |
+| **CT-01** | Igreja cadastrada na CBT sem organização ERV associada. | Diretor local submete formulário ativando o Grupo de Ação Missionária. | O sistema persiste o ERV vinculado à igreja, disponibiliza a emissão de links censitários e atualiza o pin no mapa. |
 | **CT-02** | Candidato aos Embaixadores do Rei com 13 anos preenche o autocadastro. | Submete os dados sem preenchimento dos dados do responsável legal. | O sistema impede a conclusão, sinaliza obrigatoriedade legal e só valida a submissão após preenchimento do CPF do responsável. |
-| **CT-03** | Visitante da interface pública seleciona no mapa a cidade de Palmas e a organização SMHB. | Aciona os filtros de seleção no módulo cartográfico interativo. | A interface cartográfica isola e renderiza exclusivamente as igrejas da capital que possuam Sociedade de Homens ativa. |
+| **CT-03** | Visitante da interface pública seleciona no mapa a cidade de Palmas e a organização HD. | Aciona os filtros de seleção no módulo cartográfico interativo. | A interface cartográfica isola e renderiza exclusivamente as igrejas da capital que possuam Sociedade de Homens ativa. |
 | **CT-04** | Administrador Estadual acessa o painel de censo e filtra pela Associação Norte. | Aplica a segmentação territorial regional no dashboard analítico. | Os gráficos de pirâmide etária e talentos vocacionais recalculam instantaneamente os dados exclusivos daquela circunscrição. |
 
 ## **Considerações Finais**

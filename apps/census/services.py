@@ -96,10 +96,10 @@ def _transicoes(qs):
 
     return {
         "ER": _anon(qs.filter(organizacoes__tipo=Organizacao.Tipo.ER).distinct().count()),
-        "GAM": _anon(qs.filter(organizacoes__tipo=Organizacao.Tipo.GAM).distinct().count()),
-        "SMHB": _anon(qs.filter(organizacoes__tipo=Organizacao.Tipo.SMHB).distinct().count()),
-        "ER_para_GAM": _anon(duplo(Organizacao.Tipo.ER, Organizacao.Tipo.GAM)),
-        "GAM_para_SMHB": _anon(duplo(Organizacao.Tipo.GAM, Organizacao.Tipo.SMHB)),
+        "ERV": _anon(qs.filter(organizacoes__tipo=Organizacao.Tipo.ERV).distinct().count()),
+        "HD": _anon(qs.filter(organizacoes__tipo=Organizacao.Tipo.HD).distinct().count()),
+        "ER_para_ERV": _anon(duplo(Organizacao.Tipo.ER, Organizacao.Tipo.ERV)),
+        "ERV_para_HD": _anon(duplo(Organizacao.Tipo.ERV, Organizacao.Tipo.HD)),
     }
 
 

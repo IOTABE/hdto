@@ -34,7 +34,7 @@ def cenario(db):
         status=Igreja.Status.HOMOLOGADA,
         homologado_em=timezone.now(),
     )
-    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
+    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.HD)
     user = User.objects.create_user(email="membro@example.com", password="x", full_name="Membro")
     membro = Membro.objects.create(
         user=user,

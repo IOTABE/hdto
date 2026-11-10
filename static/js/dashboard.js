@@ -33,7 +33,7 @@
     organizacoes: new Chart(document.getElementById("grafico-organizacoes"), {
       type: "doughnut",
       data: {
-        labels: ["SMHB", "GAM", "Embaixadores do Rei"],
+        labels: ["HD", "ERV", "Embaixadores do Rei"],
         datasets: [{ data: [0, 0, 0], backgroundColor: [PALETA.primary, PALETA.accent, PALETA.teal], borderWidth: 0, hoverOffset: 8 }],
       },
       options: { responsive: true, cutout: "62%", plugins: { legend: { position: "bottom" } } },
@@ -86,8 +86,8 @@
         `${cobertura.municipios_com_organizacao ?? 0} de ${cobertura.total_municipios ?? 139} municípios`;
 
       const orgs = dados.por_organizacao || {};
-      document.getElementById("kpi-smhb").textContent = valor(orgs.SMHB);
-      document.getElementById("kpi-gam").textContent = valor(orgs.GAM);
+      document.getElementById("kpi-hd").textContent = valor(orgs.HD);
+      document.getElementById("kpi-erv").textContent = valor(orgs.ERV);
       document.getElementById("kpi-er").textContent = valor(orgs.ER);
 
       const piramide = dados.piramide_etaria || {};
@@ -96,7 +96,7 @@
       graficos.piramide.data.datasets[0].data = faixas.map((faixa) => piramide[faixa] ?? 0);
       graficos.piramide.update();
 
-      graficos.organizacoes.data.datasets[0].data = [orgs.SMHB ?? 0, orgs.GAM ?? 0, orgs.ER ?? 0];
+      graficos.organizacoes.data.datasets[0].data = [orgs.HD ?? 0, orgs.ERV ?? 0, orgs.ER ?? 0];
       graficos.organizacoes.update();
 
       const vocacional = dados.banco_vocacional || {};

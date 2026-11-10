@@ -90,7 +90,7 @@ def test_organizacao_exige_igreja_homologada(associacao, municipio):
         razao_social="Igreja Pendente",
         status=Igreja.Status.PENDENTE,
     )
-    org = Organizacao(igreja=pendente, tipo=Organizacao.Tipo.GAM)
+    org = Organizacao(igreja=pendente, tipo=Organizacao.Tipo.ERV)
     with pytest.raises(ValidationError) as exc:
         org.full_clean()
     assert "igreja" in exc.value.message_dict
@@ -98,9 +98,9 @@ def test_organizacao_exige_igreja_homologada(associacao, municipio):
 
 @pytest.mark.django_db
 def test_organizacao_unica_por_tipo(igreja):
-    Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.GAM)
+    Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.ERV)
     with pytest.raises(IntegrityError):
-        Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.GAM)
+        Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.ERV)
 
 
 @pytest.mark.django_db
@@ -134,7 +134,7 @@ def test_escopo_por_papel(db):
         razao_social="Igreja B", status=Igreja.Status.HOMOLOGADA,
         homologado_em=timezone.now(),
     )
-    Organizacao.objects.create(igreja=igreja_a, tipo=Organizacao.Tipo.SMHB)
+    Organizacao.objects.create(igreja=igreja_a, tipo=Organizacao.Tipo.HD)
     Organizacao.objects.create(igreja=igreja_b, tipo=Organizacao.Tipo.ER)
 
     admin = make_role_user("admin2@example.com", Role.ADMIN_ESTADUAL)

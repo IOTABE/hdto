@@ -13,7 +13,7 @@ Plataforma web (site público + backoffice + APIs analíticas) para a liderança
 
 | Módulo | Entrega principal | Origem no PRD |
 |---|---|---|
-| Institucional | Páginas de história/valores, ER/GAM/SMHB, notícias e galerias | §§ 3 |
+| Institucional | Páginas de história/valores, ER/ERV/HD, notícias e galerias | §§ 3 |
 | Governança | RBAC em 4 níveis e escopo hierárquico | § 2 |
 | Cadastros | Associação → Igreja → Organização → Membro | § 4 |
 | Censo | Coleta censitária + consentimento LGPD | §§ 5 e 8 |
@@ -45,7 +45,7 @@ Plataforma web (site público + backoffice + APIs analíticas) para a liderança
 ```text
 Associação Regional (N)
   └── Igreja / Congregação (N)  [igreja_mae para congregações sem CNPJ]
-        └── Organização Local (SMHB | GAM | ER)  [no máximo 1 de cada]
+        └── Organização Local (HD | ERV | ER)  [no máximo 1 de cada]
               └── Membro (N)  [≥ 1 organização ativa]
                     ├── Responsável Legal (se < 18 anos)
                     └── Consentimento (append-only)
@@ -324,7 +324,7 @@ CSRF_TRUSTED_ORIGINS=https://hdto.exemplo.org.br
 ### `apps/institutions`
 - `AssociacaoRegional`: nome, macrorregião, coordenador, contatos.
 - `Igreja`: CNPJ único (validação de dígitos), razão social, nome fantasia, pastor, contato, endereço, `municipio` FK, `geom PointField(srid=4326)`, `associacao` FK, `igreja_mae` self-FK, `status` (`PENDENTE`, `HOMOLOGADA`, `INATIVA`), homologação (quem/quando).
-- `Organizacao`: `tipo` (`SMHB`, `GAM`, `ER`), igreja FK, data de fundação, líder/conselheiro, contato, dia/horário, status. **Constraint `unique(igreja, tipo)`**.
+- `Organizacao`: `tipo` (`HD`, `ERV`, `ER`), igreja FK, data de fundação, líder/conselheiro, contato, dia/horário, status. **Constraint `unique(igreja, tipo)`**.
 - Regras: não criar organização em igreja não homologada; não duplicar tipo por igreja; congregação sem CNPJ exige `igreja_mae`.
 
 ### `apps/members`
@@ -509,9 +509,9 @@ Checklist de produção:
 - Testes de regra: CNPJ único, 1 organização por tipo, igreja não homologada.
 - Testes de API: performance com `django-debug-toolbar`/`pytest-benchmark`, N+1 com `assertNumQueries`.
 - E2E dos cenários do PRD (Playwright ou Django `LiveServerTestCase`):
-  - CT-01: ativar GAM e refletir no mapa.
+  - CT-01: ativar ERV e refletir no mapa.
   - CT-02: bloquear menor sem responsável.
-  - CT-03: filtrar Palmas + SMHB.
+  - CT-03: filtrar Palmas + HD.
   - CT-04: dashboard filtrado pela Associação Norte.
 - Teste de carga leve (k6/Locust) nas APIs de dashboard/mapa.
 
@@ -543,7 +543,7 @@ Checklist de produção:
 - Modelos Associação/Igreja/Organização, validações, workflow de homologação.
 - CRUD no admin + telas locais; seed e importação.
 
-**DoD:** CT-01 (criação de GAM) e homologação de igreja funcionando.
+**DoD:** CT-01 (criação de ERV) e homologação de igreja funcionando.
 
 ### Fase 4 — Membros, consentimento e LGPD (2 semanas)
 - Membro, responsável legal, consentimento append-only, cifragem e hash de CPF.
@@ -572,7 +572,7 @@ Checklist de produção:
 **DoD:** inscrição → QR válido → check-in; feed ICS importável.
 
 ### Fase 8 — Portal público e conteúdo (1,5 semana)
-- Páginas institucionais (ER/GAM/SMHB), notícias, galerias, SEO.
+- Páginas institucionais (ER/ERV/HD), notícias, galerias, SEO.
 - Otimização de imagens e orçamento de carga.
 
 **DoD:** Lighthouse ≥ 90 em performance/SEO; carga inicial < 1,5 MB.

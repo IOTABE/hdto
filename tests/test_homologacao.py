@@ -76,18 +76,18 @@ def test_ct01_diretor_ativa_gam_e_mapa_reflete(cenario):
     igreja = cenario["igreja_palmas"]
     diretor = make_user("diretor@example.com", Role.DIRETOR_LOCAL, igreja=igreja)
 
-    organizacao = Organizacao(igreja=igreja, tipo=Organizacao.Tipo.GAM, lider_nome=diretor.full_name)
+    organizacao = Organizacao(igreja=igreja, tipo=Organizacao.Tipo.ERV, lider_nome=diretor.full_name)
     organizacao.full_clean()
     organizacao.save()
 
-    assert igreja.organizacoes.filter(tipo=Organizacao.Tipo.GAM).exists()
+    assert igreja.organizacoes.filter(tipo=Organizacao.Tipo.ERV).exists()
 
     from django.test import Client
 
     client = Client()
     resposta = client.get(
         reverse("mapa-pontos")
-        + f"?municipio={cenario['palmas'].pk}&tipo=GAM"
+        + f"?municipio={cenario['palmas'].pk}&tipo=ERV"
     )
     dados = resposta.json()
     assert dados["total"] == 1
@@ -107,17 +107,17 @@ def test_ct02_menor_sem_responsavel_bloqueado(cenario):
 
 
 @pytest.mark.django_db
-def test_ct03_filtro_palmas_smhb(cenario):
-    Organizacao.objects.create(igreja=cenario["igreja_palmas"], tipo=Organizacao.Tipo.SMHB)
+def test_ct03_filtro_palmas_hd(cenario):
+    Organizacao.objects.create(igreja=cenario["igreja_palmas"], tipo=Organizacao.Tipo.HD)
     Organizacao.objects.create(igreja=cenario["igreja_palmas"], tipo=Organizacao.Tipo.ER)
-    Organizacao.objects.create(igreja=cenario["igreja_gurupi"], tipo=Organizacao.Tipo.SMHB)
+    Organizacao.objects.create(igreja=cenario["igreja_gurupi"], tipo=Organizacao.Tipo.HD)
 
     from django.test import Client
 
     client = Client()
     resposta = client.get(
         reverse("mapa-pontos")
-        + f"?municipio={cenario['palmas'].pk}&tipo=SMHB"
+        + f"?municipio={cenario['palmas'].pk}&tipo=HD"
     )
     dados = resposta.json()
     assert dados["total"] == 1
@@ -131,7 +131,7 @@ def test_ct04_dashboard_recalcula_por_associacao(cenario, settings):
         (cenario["igreja_palmas"], 3, "30000000"),
         (cenario["igreja_gurupi"], 2, "40000000"),
     ]:
-        org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
+        org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.HD)
         for indice in range(quantidade):
             membro = Membro.objects.create(
                 nome_completo=f"Membro {prefixo}{indice}",

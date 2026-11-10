@@ -47,7 +47,7 @@ def cenario(db):
         status=Igreja.Status.HOMOLOGADA,
         homologado_em=timezone.now(),
     )
-    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
+    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.HD)
     diretor = make_user("diretor@example.com", Role.DIRETOR_LOCAL, igreja=igreja, associacao=assoc)
     admin = make_user("admin@example.com", Role.ADMIN_ESTADUAL)
     membro_user = User.objects.create_user(
@@ -136,7 +136,7 @@ def test_diretor_ativa_organizacao(client, cenario):
         reverse("organizacao-nova"),
         {
             "igreja": cenario["igreja"].pk,
-            "tipo": Organizacao.Tipo.GAM,
+            "tipo": Organizacao.Tipo.ERV,
             "data_fundacao": "2020-01-01",
             "lider_nome": "Líder",
             "lider_contato": "63999999999",
@@ -146,7 +146,7 @@ def test_diretor_ativa_organizacao(client, cenario):
     )
     assert response.status_code == 302
     assert Organizacao.objects.filter(
-        igreja=cenario["igreja"], tipo=Organizacao.Tipo.GAM
+        igreja=cenario["igreja"], tipo=Organizacao.Tipo.ERV
     ).exists()
 
 
@@ -155,7 +155,7 @@ def test_organizacao_duplicada_retorna_erro(client, cenario):
     client.force_login(cenario["diretor"])
     response = client.post(
         reverse("organizacao-nova"),
-        {"igreja": cenario["igreja"].pk, "tipo": Organizacao.Tipo.SMHB},
+        {"igreja": cenario["igreja"].pk, "tipo": Organizacao.Tipo.HD},
     )
     assert response.status_code == 200
     assert "já está ativa" in response.content.decode()

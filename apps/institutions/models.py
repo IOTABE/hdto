@@ -111,8 +111,8 @@ class Igreja(TimeStampedModel):
 
 class Organizacao(TimeStampedModel):
     class Tipo(models.TextChoices):
-        SMHB = "SMHB", "Sociedade Missionária de Homens Batistas"
-        GAM = "GAM", "Grupo de Ação Missionária"
+        HD = "HD", "Sociedade Missionária de Homens Batistas"
+        ERV = "ERV", "Grupo de Ação Missionária"
         ER = "ER", "Embaixadores do Rei"
 
     class Status(models.TextChoices):

@@ -66,14 +66,14 @@ def dados(db):
     igreja_a2 = make_igreja(assoc_a, palmas, "11444777000161", "Segunda Batista Palmas")
     igreja_b1 = make_igreja(assoc_b, gurupi, "04252011000110", "PIB Gurupi")
 
-    org_a1 = Organizacao.objects.create(igreja=igreja_a1, tipo=Organizacao.Tipo.SMHB)
-    org_a2_gam = Organizacao.objects.create(igreja=igreja_a2, tipo=Organizacao.Tipo.GAM)
+    org_a1 = Organizacao.objects.create(igreja=igreja_a1, tipo=Organizacao.Tipo.HD)
+    org_a2_erv = Organizacao.objects.create(igreja=igreja_a2, tipo=Organizacao.Tipo.ERV)
     org_a2_er = Organizacao.objects.create(igreja=igreja_a2, tipo=Organizacao.Tipo.ER)
-    org_b1 = Organizacao.objects.create(igreja=igreja_b1, tipo=Organizacao.Tipo.SMHB)
+    org_b1 = Organizacao.objects.create(igreja=igreja_b1, tipo=Organizacao.Tipo.HD)
 
     make_membro("A Criança", "100000001", 10, org_a2_er)
     make_membro("A Adolescente", "100000002", 13, org_a2_er)
-    make_membro("A Jovem", "100000003", 20, org_a2_gam)
+    make_membro("A Jovem", "100000003", 20, org_a2_erv)
     make_membro("A Adulto 1", "100000004", 30, org_a1)
     make_membro("A Adulto 2", "100000005", 40, org_a1)
     make_membro("A Idoso", "100000006", 65, org_a1)
@@ -101,7 +101,7 @@ def dados(db):
         "igreja_a2": igreja_a2,
         "igreja_b1": igreja_b1,
         "org_a1": org_a1,
-        "org_a2_gam": org_a2_gam,
+        "org_a2_erv": org_a2_erv,
         "org_a2_er": org_a2_er,
         "org_b1": org_b1,
     }
@@ -128,7 +128,7 @@ def test_admin_ve_total_consolidado(client, dados, settings):
     data = client.get(reverse("censo-indicadores")).json()
 
     assert data["total_membros"] == 8
-    assert data["por_organizacao"] == {"SMHB": 5, "GAM": 1, "ER": 2}
+    assert data["por_organizacao"] == {"HD": 5, "ERV": 1, "ER": 2}
     assert data["piramide_etaria"] == {
         "9-11": 1,
         "12-17": 1,
@@ -172,7 +172,7 @@ def test_k_anonimato_suprime_grupos_pequenos(client, dados, settings):
     client.force_login(admin)
     data = client.get(reverse("censo-indicadores")).json()
     assert data["total_membros"] == 8
-    assert data["por_organizacao"]["SMHB"] == 5
-    assert data["por_organizacao"]["GAM"] is None
+    assert data["por_organizacao"]["HD"] == 5
+    assert data["por_organizacao"]["ERV"] is None
     assert data["por_organizacao"]["ER"] is None
     assert data["banco_vocacional"]["saude"] is None

@@ -27,7 +27,7 @@ def cenario(db):
         status=Igreja.Status.HOMOLOGADA,
         homologado_em=timezone.now(),
     )
-    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
+    org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.HD)
     termo, _ = TermoVersao.objects.get_or_create(
         versao="1.0", defaults={"texto": "Consinto com o tratamento dos dados."}
     )

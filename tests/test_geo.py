@@ -36,7 +36,7 @@ def mapa(db):
     igreja_palmas = make_igreja(assoc, palmas, "11222333000181", "PIB Palmas", PALMAS)
     igreja_gurupi = make_igreja(assoc, gurupi, "11444777000161", "PIB Gurupi", GURUPI)
     Organizacao.objects.create(igreja=igreja_palmas, tipo=Organizacao.Tipo.ER)
-    Organizacao.objects.create(igreja=igreja_gurupi, tipo=Organizacao.Tipo.SMHB)
+    Organizacao.objects.create(igreja=igreja_gurupi, tipo=Organizacao.Tipo.HD)
     return {
         "assoc": assoc,
         "palmas": palmas,

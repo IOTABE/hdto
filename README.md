@@ -1,6 +1,6 @@
 # HDTO — Plataforma dos Homens Batistas do Tocantins
 
-Aplicação Django para a UMHB-TO/CBT: portal institucional, cadastro hierárquico de igrejas e organizações (SMHB, GAM, ER), censo com LGPD, painel analítico, mapa das congregações e eventos com QR Code.
+Aplicação Django para a UMHB-TO/CBT: portal institucional, cadastro hierárquico de igrejas e organizações (HD, ERV, ER), censo com LGPD, painel analítico, mapa das congregações e eventos com QR Code.
 
 ## Stack
 
