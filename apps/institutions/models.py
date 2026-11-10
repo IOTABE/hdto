@@ -111,8 +111,8 @@ class Igreja(TimeStampedModel):
 
 class Organizacao(TimeStampedModel):
     class Tipo(models.TextChoices):
-        HD = "HD", "Sociedade Missionária de Homens Batistas"
-        ERV = "ERV", "Grupo de Ação Missionária"
+        HD = "HD", "Homens Discípulos"
+        ERV = "ERV", "Embaixadores do Rei Valentes"
         ER = "ER", "Embaixadores do Rei"
 
     class Status(models.TextChoices):
