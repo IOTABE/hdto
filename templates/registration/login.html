@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Entrar — HDTO{% endblock %}
+{% block title %}Entrar — HB-TO{% endblock %}
 {% block content %}
   <section class="auth-layout">
     <div class="auth-intro">
@@ -14,9 +14,6 @@
     </div>
     <div class="glass-card form-card auth-card">
       <h2>Entrar</h2>
-      {% if form.errors %}
-        <div class="form-alert" role="alert"><p>E-mail ou senha inválidos.</p></div>
-      {% endif %}
       <form method="post" novalidate>
         {% csrf_token %}
         {% include "includes/form_fields.html" %}

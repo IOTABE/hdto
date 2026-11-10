@@ -2,8 +2,15 @@
 {% block title %}{{ galeria.titulo }} — HB-TO{% endblock %}
 {% block meta_description %}{{ galeria.descricao }}{% endblock %}
 {% block content %}
-  <h1>{{ galeria.titulo }}</h1>
-  <p>{{ galeria.descricao }}</p>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Galeria</p>
+      <h1>{{ galeria.titulo }}</h1>
+      {% if galeria.descricao %}<p class="subtitle">{{ galeria.descricao }}</p>{% endif %}
+    </div>
+    <a class="btn btn--outlined btn--sm" href="{% url 'galeria-lista' %}">Voltar às galerias</a>
+  </header>
+
   <div class="galeria">
     {% for foto in fotos %}
       <figure>
@@ -11,7 +18,7 @@
         {% if foto.legenda %}<figcaption>{{ foto.legenda }}</figcaption>{% endif %}
       </figure>
     {% empty %}
-      <p>Nenhuma foto nesta galeria.</p>
+      <p class="glass-card empty-state">Nenhuma foto nesta galeria.</p>
     {% endfor %}
   </div>
 {% endblock %}

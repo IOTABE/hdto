@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Galerias — HB-TO{% endblock %}
 {% block content %}
-  <h1>Galerias</h1>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Memória e comunhão</p>
+      <h1>Galerias</h1>
+      <p class="subtitle">Registros dos encontros, congressos e ações das organizações.</p>
+    </div>
+  </header>
+
   <ul class="card-list">
     {% for galeria in galerias %}
       <li>
-        <a href="{% url 'galeria-detalhe' galeria.slug %}">{{ galeria.titulo }}</a>
-        <p>{{ galeria.descricao }}</p>
+        <h2><a href="{% url 'galeria-detalhe' galeria.slug %}">{{ galeria.titulo }}</a></h2>
+        {% if galeria.descricao %}<p>{{ galeria.descricao }}</p>{% endif %}
+        <p class="meta">{{ galeria.fotos.count }} foto{{ galeria.fotos.count|pluralize }}</p>
       </li>
     {% empty %}
-      <li>Nenhuma galeria publicada.</li>
+      <li class="empty-state">Nenhuma galeria publicada.</li>
     {% endfor %}
   </ul>
 {% endblock %}

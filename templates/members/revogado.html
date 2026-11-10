@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Consentimento revogado — HB-TO{% endblock %}
 {% block content %}
-  <h1>Consentimento revogado</h1>
-  <p>Seus dados pessoais foram anonimizados e a conta foi inativada. Os registros de auditoria exigidos por lei foram preservados.</p>
-  <p><a href="{% url 'home' %}">Voltar ao início</a></p>
+  <div class="glass-card notice-card success-card">
+    <div class="success-icon" aria-hidden="true">✓</div>
+    <h1>Consentimento revogado</h1>
+    <p>Seus dados pessoais foram anonimizados e a conta foi inativada. Os registros de auditoria exigidos por lei foram preservados.</p>
+    <div class="form-actions form-actions--center">
+      <a class="btn btn--filled" href="{% url 'home' %}">Voltar ao início</a>
+    </div>
+  </div>
 {% endblock %}
