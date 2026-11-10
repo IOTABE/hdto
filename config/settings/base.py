@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "apps.members",
     "apps.census",
     "apps.dashboard",
+    "apps.events",
 ]
 
 CENSO_K_ANONIMATO = int(env("CENSO_K_ANONIMATO", default="5"))
