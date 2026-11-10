@@ -30,7 +30,11 @@ INSTALLED_APPS = [
     "apps.geo",
     "apps.institutions",
     "apps.members",
+    "apps.census",
+    "apps.dashboard",
 ]
+
+CENSO_K_ANONIMATO = int(env("CENSO_K_ANONIMATO", default="5"))
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
