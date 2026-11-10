@@ -10,10 +10,10 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - media:/app/media
-    expose:
-      - "8000"
+    ports:
+      - "8006:8006"
     healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health/"]
+      test: ["CMD", "curl", "-fsS", "http://localhost:8006/health/"]
       interval: 30s
       timeout: 5s
       retries: 3

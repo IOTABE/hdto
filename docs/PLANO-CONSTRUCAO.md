@@ -426,8 +426,8 @@ COPY --from=builder /app /app
 ENV PATH="/app/.venv/bin:$PATH" \
     DJANGO_SETTINGS_MODULE=config.settings.prod
 RUN python manage.py collectstatic --noinput
-EXPOSE 8000
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "60"]
+EXPOSE 8006
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8006", "--workers", "3", "--timeout", "60"]
 ```
 
 `docker-compose.prod.yml` (Postgres **externo** na porta 5434):
@@ -443,9 +443,9 @@ services:
     volumes:
       - media:/app/media
     expose:
-      - "8000"
+      - "8006"
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health/')"]
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8006/health/')"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -471,7 +471,7 @@ volumes:
 ```caddy
 hdto.exemplo.org.br {
     encode zstd gzip
-    reverse_proxy web:8000
+    reverse_proxy web:8006
 }
 ```
 

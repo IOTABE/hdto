@@ -12,6 +12,6 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.dev
       UV_PROJECT_ENVIRONMENT: /app/.venv
-    command: sh -c "uv sync --frozen && uv run python manage.py migrate && uv run python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "uv sync --frozen && uv run python manage.py migrate && uv run python manage.py runserver 0.0.0.0:8006"
     ports:
-      - "8006:8000"
+      - "8006:8006"

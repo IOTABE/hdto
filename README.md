@@ -41,7 +41,7 @@ uv run python -c "from cryptography.fernet import Fernet; print(Fernet.generate_
 docker compose up --build
 ```
 
-Acesse http://localhost:8000. O comando do compose roda `migrate` e `runserver`.
+Acesse http://localhost:8006. O comando do compose roda `migrate` e `runserver`.
 
 > O host precisa das bibliotecas GDAL/GEOS/PROJ/SpatiaLite para rodar `uv run` diretamente. A imagem `Dockerfile.dev` já as inclui — por isso o fluxo padrão é via Docker.
 

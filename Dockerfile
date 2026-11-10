@@ -24,6 +24,6 @@ ENV PATH="/app/.venv/bin:$PATH" \
     DJANGO_SETTINGS_MODULE=config.settings.prod \
     PYTHONUNBUFFERED=1
 
-EXPOSE 8000
+EXPOSE 8006
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "60"]
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8006", "--workers", "3", "--timeout", "60"]
