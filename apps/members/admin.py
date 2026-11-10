@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Consentimento, Membro, ResponsavelLegal, TermoVersao
+from .models import Consentimento, Membro, ResponsavelLegal, RevogacaoConsentimento, TermoVersao
 
 
 @admin.register(TermoVersao)
@@ -31,6 +31,21 @@ class ConsentimentoAdmin(admin.ModelAdmin):
     list_filter = ["termo"]
     search_fields = ["membro__nome_completo"]
     readonly_fields = [field.name for field in Consentimento._meta.fields]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(RevogacaoConsentimento)
+class RevogacaoConsentimentoAdmin(admin.ModelAdmin):
+    list_display = ["membro", "ip", "criado_em"]
+    readonly_fields = ["membro", "ip", "motivo", "criado_em"]
 
     def has_add_permission(self, request):
         return False

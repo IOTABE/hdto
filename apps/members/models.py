@@ -183,6 +183,31 @@ class Membro(TimeStampedModel):
         return consentimento
 
 
+class RevogacaoConsentimento(models.Model):
+    membro = models.ForeignKey(
+        Membro, on_delete=models.PROTECT, related_name="revogacoes", verbose_name="membro"
+    )
+    ip = models.GenericIPAddressField("IP de origem", null=True, blank=True)
+    motivo = models.TextField("motivo", blank=True)
+    criado_em = models.DateTimeField("revogado em", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "revogação de consentimento"
+        verbose_name_plural = "revogações de consentimento"
+        ordering = ["-criado_em"]
+
+    def __str__(self):
+        return f"Revogação de {self.membro} em {self.criado_em:%d/%m/%Y}"
+
+    def save(self, *args, **kwargs):
+        if self.pk and not self._state.adding:
+            raise ValidationError("Registros de revogação são imutáveis.")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValidationError("Registros de revogação não podem ser excluídos.")
+
+
 class Consentimento(models.Model):
     membro = models.ForeignKey(
         Membro, on_delete=models.PROTECT, related_name="consentimentos", verbose_name="membro"

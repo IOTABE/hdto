@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Meu perfil — HDTO{% endblock %}
+{% block content %}
+  <h1>Meu perfil</h1>
+  {% if membro %}
+    <dl class="perfil">
+      <dt>Nome</dt><dd>{{ membro.nome_completo }}</dd>
+      <dt>Status</dt><dd>{{ membro.get_status_display }}</dd>
+      <dt>Organizações</dt>
+      <dd>
+        {% for org in membro.organizacoes.all %}
+          {{ org.get_tipo_display }}{% if not forloop.last %}, {% endif %}
+        {% empty %}Nenhuma{% endfor %}
+      </dd>
+    </dl>
+
+    <h2>Consentimentos</h2>
+    <ul>
+      {% for consentimento in consentimentos %}
+        <li>{{ consentimento.termo.versao }} — {{ consentimento.criado_em|date:"d/m/Y H:i" }}</li>
+      {% empty %}
+        <li>Nenhum consentimento registrado.</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Privacidade</h2>
+    <p>Ao revogar o consentimento, seus dados pessoais serão anonimizados e sua conta inativada, preservando apenas registros obrigatórios por lei.</p>
+    <form method="post" action="{% url 'revogar-consentimento' %}">
+      {% csrf_token %}
+      <label>Motivo (opcional)
+        <textarea name="motivo" rows="3"></textarea>
+      </label>
+      <button type="submit">Revogar consentimento e anonimizar meus dados</button>
+    </form>
+  {% else %}
+    <p>Não há cadastro de membro vinculado a esta conta.</p>
+  {% endif %}
+{% endblock %}

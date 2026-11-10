@@ -7,6 +7,7 @@ from apps.geo.views import mapa
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("contas/", include("apps.accounts.urls")),
+    path("conta/", include("apps.members.urls")),
     path("api/", include("apps.dashboard.urls")),
     path("api/mapa/", include("apps.geo.urls")),
     path("eventos/", include("apps.events.urls")),

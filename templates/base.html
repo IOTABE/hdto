@@ -21,7 +21,7 @@
       </nav>
       <div class="session">
         {% if user.is_authenticated %}
-          <a href="{% url 'dashboard' %}">{{ user.full_name }}</a>
+          <a href="{% url 'meu-perfil' %}">{{ user.full_name }}</a>
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Sair</button>
