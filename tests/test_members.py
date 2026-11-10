@@ -28,7 +28,9 @@ def cenario(db):
         homologado_em=timezone.now(),
     )
     org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
-    termo = TermoVersao.objects.create(versao="1.0", texto="Consinto com o tratamento dos dados.")
+    termo, _ = TermoVersao.objects.get_or_create(
+        versao="1.0", defaults={"texto": "Consinto com o tratamento dos dados."}
+    )
     return {"igreja": igreja, "org": org, "termo": termo}
 
 

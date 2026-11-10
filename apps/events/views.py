@@ -1,10 +1,11 @@
 import io
 
 import qrcode
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -12,6 +13,7 @@ from django.views.decorators.http import require_POST
 from apps.accounts.permissions import role_required
 from apps.accounts.roles import Role
 
+from .forms import InscricaoForm
 from .models import Evento, Inscricao
 
 
@@ -22,7 +24,43 @@ def evento_lista(request):
 
 def evento_detalhe(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
-    return render(request, "events/evento_detalhe.html", {"evento": evento})
+    minha_inscricao = None
+    if request.user.is_authenticated:
+        minha_inscricao = Inscricao.objects.filter(
+            evento=evento, membro__user=request.user
+        ).first()
+    return render(
+        request,
+        "events/evento_detalhe.html",
+        {"evento": evento, "minha_inscricao": minha_inscricao},
+    )
+
+
+@login_required
+def inscricao_nova(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    if not evento.esta_aberto():
+        messages.warning(request, "As inscrições para este evento estão encerradas.")
+        return redirect("evento-detalhe", pk=evento.pk)
+
+    if getattr(request.user, "membro", None) is None and not request.user.has_role(
+        Role.ADMIN_ESTADUAL, Role.COORDENADOR_REGIONAL, Role.DIRETOR_LOCAL
+    ):
+        messages.info(request, "Conclua seu cadastro de membro para se inscrever.")
+        return redirect("membro-novo")
+
+    form = InscricaoForm(request.POST or None, user=request.user, evento=evento)
+    if request.method == "POST" and form.is_valid():
+        inscricao = Inscricao.objects.create(
+            evento=evento, membro=form.cleaned_data["membro"]
+        )
+        messages.success(
+            request,
+            f"Inscrição de {inscricao.membro.nome_completo} confirmada. "
+            "A credencial com QR Code está disponível no seu perfil.",
+        )
+        return redirect("evento-detalhe", pk=evento.pk)
+    return render(request, "events/inscricao_form.html", {"evento": evento, "form": form})
 
 
 def _ics_escape(valor):

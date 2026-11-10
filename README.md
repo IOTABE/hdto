@@ -79,6 +79,11 @@ docker compose run --rm web uv run python manage.py importar_municipios_to --arq
 | GET | `/api/mapa/pontos/` | Pins com filtros e raio |
 | GET | `/api/mapa/municipios/` | GeoJSON municipal |
 | GET | `/api/censo/indicadores/` | Painel (admin/coord/diretor) |
+| GET | `/cadastros/igrejas/nova/` | Formulário de igreja |
+| GET | `/cadastros/organizacoes/nova/` | Formulário de organização |
+| GET | `/cadastro/membro/` | Autocadastro censitário |
+| GET | `/eventos/<id>/inscrever/` | Formulário de inscrição |
+| GET | `/contas/painel/` | Painel analítico com filtros |
 | GET | `/conta/perfil/` | Portal do titular |
 | POST | `/conta/revogar-consentimento/` | Revogação + anonimização |
 | GET | `/health/` | Healthcheck |
@@ -93,6 +98,10 @@ cp .env.example .env   # preencha segredos e DB_*
 ```
 
 Variáveis essenciais: `SECRET_KEY`, `FIELD_ENCRYPTION_KEY`, `CPF_HASH_PEPPER`, `DB_*` (porta **5434**).
+
+## Interface
+
+O frontend usa princípios de Material UX (elevação, estados, foco visível, áreas de toque de 44px, snackbars) combinados com glassmorphism (painéis translúcidos, blur e gradientes suaves). O CSS e os scripts ficam em `static/` e não dependem de build de Tailwind.
 
 ## LGPD
 

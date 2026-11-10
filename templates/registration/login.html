@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 {% block title %}Entrar — HDTO{% endblock %}
 {% block content %}
-  <h1>Entrar</h1>
-  {% if form.errors %}
-    <p class="error">E-mail ou senha inválidos.</p>
-  {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Entrar</button>
-  </form>
+  <section class="auth-layout">
+    <div class="auth-intro">
+      <p class="eyebrow">Acesso restrito</p>
+      <h1>Bem-vindo de volta</h1>
+      <p class="subtitle">Entre para gerenciar cadastros, acompanhar o censo e mobilizar o trabalho masculino no Tocantins.</p>
+      <ul class="feature-list">
+        <li>Painel censitário com recortes por associação</li>
+        <li>Mapa das congregações e organizações</li>
+        <li>Inscrições e credenciais com QR Code</li>
+      </ul>
+    </div>
+    <div class="glass-card form-card auth-card">
+      <h2>Entrar</h2>
+      {% if form.errors %}
+        <div class="form-alert" role="alert"><p>E-mail ou senha inválidos.</p></div>
+      {% endif %}
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% include "includes/form_fields.html" %}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+        <div class="form-actions">
+          <button class="btn btn--filled" type="submit">Entrar</button>
+        </div>
+      </form>
+      <p class="helper">Ainda não tem cadastro? <a href="{% url 'membro-novo' %}">Cadastre-se como membro</a>.</p>
+    </div>
+  </section>
 {% endblock %}

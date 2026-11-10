@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Nova organização — HDTO{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Cadastro institucional</p>
+      <h1>Ativar organização local</h1>
+      <p class="subtitle">Cada igreja pode ter uma instância de SMHB, GAM e Embaixadores do Rei.</p>
+    </div>
+  </header>
+
+  <div class="glass-card form-card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include "includes/form_fields.html" %}
+      <div class="form-actions">
+        <a class="btn btn--text" href="{% url 'dashboard' %}">Cancelar</a>
+        <button class="btn btn--filled" type="submit">Ativar organização</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

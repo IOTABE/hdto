@@ -1,15 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Eventos — HDTO{% endblock %}
 {% block content %}
-  <h1>Eventos</h1>
-  <ul class="card-list">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Agenda oficial</p>
+      <h1>Eventos</h1>
+      <p class="subtitle">Congressos, acampamentos, simpósios e ações missionárias.</p>
+    </div>
+  </header>
+
+  <div class="card-grid">
     {% for evento in eventos %}
-      <li>
-        <a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a>
-        <span>{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} — {{ evento.local_nome }}{% endif %}</span>
-      </li>
+      <article class="glass-card event-card">
+        <div class="event-card__date">
+          <span>{{ evento.inicio|date:"d" }}</span>
+          <small>{{ evento.inicio|date:"M" }}</small>
+        </div>
+        <div>
+          <p class="eyebrow">{{ evento.get_tipo_display }} · {{ evento.get_abrangencia_display }}</p>
+          <h2><a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a></h2>
+          <p class="meta">{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}</p>
+        </div>
+      </article>
     {% empty %}
-      <li>Nenhum evento programado.</li>
+      <p class="glass-card empty-state">Nenhum evento programado.</p>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}

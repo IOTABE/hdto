@@ -1,45 +1,71 @@
 {% extends "base.html" %}
 {% block title %}Homens Batistas do Tocantins{% endblock %}
 {% block content %}
-  <section class="hero">
-    <h1>Homens transformados em discípulos integrais</h1>
-    <p>Mobilizando homens, rapazes e meninos para servir a Cristo, à família, à igreja e à sociedade.</p>
+  <section class="hero glass">
+    <div class="hero__content">
+      <p class="eyebrow">UMHB-TO · Convenção Batista do Tocantins</p>
+      <h1>Homens transformados em discípulos integrais</h1>
+      <p>Mobilizando homens, rapazes e meninos para servir a Cristo, à família, à igreja e à sociedade.</p>
+      <div class="button-row">
+        <a class="btn btn--filled" href="{% url 'membro-novo' %}">Fazer meu cadastro</a>
+        <a class="btn btn--outlined" href="{% url 'mapa' %}">Ver mapa das congregações</a>
+      </div>
+    </div>
+    <div class="hero__orb" aria-hidden="true"></div>
   </section>
 
-  <section>
-    <h2>Próximos eventos</h2>
-    <ul class="card-list">
+  <section class="home-section">
+    <div class="section-head">
+      <h2>Próximos eventos</h2>
+      <a href="{% url 'evento-lista' %}">Ver todos</a>
+    </div>
+    <div class="card-grid">
       {% for evento in proximos_eventos %}
-        <li>
-          <a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a>
-          <span>{{ evento.inicio|date:"d/m/Y H:i" }} — {{ evento.local_nome }}</span>
-        </li>
+        <article class="glass-card event-card">
+          <div class="event-card__date">
+            <span>{{ evento.inicio|date:"d" }}</span>
+            <small>{{ evento.inicio|date:"M" }}</small>
+          </div>
+          <div>
+            <h3><a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a></h3>
+            <p class="meta">{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}</p>
+          </div>
+        </article>
       {% empty %}
-        <li>Nenhum evento programado.</li>
+        <p class="glass-card empty-state">Nenhum evento programado.</p>
       {% endfor %}
-    </ul>
+    </div>
   </section>
 
-  <section>
-    <h2>Notícias</h2>
-    <ul class="card-list">
+  <section class="home-section">
+    <div class="section-head">
+      <h2>Notícias</h2>
+      <a href="{% url 'noticia-lista' %}">Ver todas</a>
+    </div>
+    <div class="card-grid">
       {% for noticia in noticias %}
-        <li>
-          <a href="{% url 'noticia-detalhe' noticia.slug %}">{{ noticia.titulo }}</a>
+        <article class="glass-card news-card">
+          <p class="eyebrow">{{ noticia.publicada_em|date:"d/m/Y" }}</p>
+          <h3><a href="{% url 'noticia-detalhe' noticia.slug %}">{{ noticia.titulo }}</a></h3>
           <p>{{ noticia.resumo }}</p>
-        </li>
+        </article>
       {% empty %}
-        <li>Nenhuma notícia publicada.</li>
+        <p class="glass-card empty-state">Nenhuma notícia publicada.</p>
       {% endfor %}
-    </ul>
+    </div>
   </section>
 
-  <section>
-    <h2>Organizações</h2>
-    <ul class="card-list">
-      {% for pagina in paginas %}
-        <li><a href="{% url 'pagina' pagina.slug %}">{{ pagina.titulo }}</a></li>
-      {% endfor %}
-    </ul>
-  </section>
+  {% if paginas %}
+    <section class="home-section">
+      <div class="section-head"><h2>Organizações</h2></div>
+      <div class="card-grid card-grid--compact">
+        {% for pagina in paginas %}
+          <a class="glass-card link-card" href="{% url 'pagina' pagina.slug %}">
+            <span>{{ pagina.titulo }}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}

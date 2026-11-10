@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Cadastro de membro — HDTO{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Censo e cadastro</p>
+      <h1>Cadastro de membro</h1>
+      <p class="subtitle">Seus dados são tratados com consentimento específico e podem ser revogados a qualquer momento.</p>
+    </div>
+  </header>
+
+  <div class="glass-card form-card">
+    <form method="post" novalidate data-member-form>
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="form-alert" role="alert">
+          {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+        </div>
+      {% endif %}
+
+      <section class="form-section">
+        <h2>Dados pessoais</h2>
+        <div class="form-grid">
+          {% include "includes/field.html" with field=form.nome_completo %}
+          {% include "includes/field.html" with field=form.cpf %}
+          {% include "includes/field.html" with field=form.data_nascimento %}
+          {% include "includes/field.html" with field=form.estado_civil %}
+          {% include "includes/field.html" with field=form.profissao %}
+          {% include "includes/field.html" with field=form.email %}
+          {% include "includes/field.html" with field=form.telefone %}
+          {% include "includes/field.html" with field=form.endereco %}
+        </div>
+        {% include "includes/field.html" with field=form.talentos %}
+      </section>
+
+      <section class="form-section">
+        <h2>Organizações</h2>
+        {% include "includes/field.html" with field=form.organizacoes %}
+      </section>
+
+      <section class="form-section guardian-section" data-guardian
+        {% if not form.responsavel_nome.errors and not form.responsavel_cpf.errors and not form.responsavel_parentesco.errors %}hidden{% endif %}>
+        <h2>Responsável legal</h2>
+        <p class="helper">Obrigatório para menores de 18 anos, conforme LGPD e ECA.</p>
+        <div class="form-grid">
+          {% include "includes/field.html" with field=form.responsavel_nome %}
+          {% include "includes/field.html" with field=form.responsavel_cpf %}
+          {% include "includes/field.html" with field=form.responsavel_parentesco %}
+          {% include "includes/field.html" with field=form.responsavel_telefone %}
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Consentimento</h2>
+        {% include "includes/field.html" with field=form.consentimento %}
+      </section>
+
+      <div class="form-actions">
+        <a class="btn btn--text" href="{% url 'home' %}">Cancelar</a>
+        <button class="btn btn--filled" type="submit">Concluir cadastro</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+{% block extra_scripts %}
+  <script src="/static/js/forms.js" defer></script>
+{% endblock %}

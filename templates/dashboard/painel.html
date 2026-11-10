@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Painel analítico — HDTO{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Inteligência censitária</p>
+      <h1>Painel analítico</h1>
+      <p class="subtitle">
+        {% if papel %}Perfil: {{ papel.label }}. {% endif %}
+        Indicadores recalculados conforme os filtros e o seu escopo de acesso.
+      </p>
+    </div>
+  </header>
+
+  <section class="glass filter-bar" aria-label="Filtros do painel">
+    <div class="field field--select">
+      <select id="filtro-associacao" class="select" aria-label="Associação regional">
+        <option value="">Todas as associações</option>
+        {% for associacao in associacoes %}
+          <option value="{{ associacao.pk }}">{{ associacao.nome }}</option>
+        {% endfor %}
+      </select>
+      <label for="filtro-associacao">Associação</label>
+    </div>
+    <div class="field field--select">
+      <select id="filtro-municipio" class="select" aria-label="Município">
+        <option value="">Todos os municípios</option>
+        {% for municipio in municipios %}
+          <option value="{{ municipio.pk }}">{{ municipio.nome }}</option>
+        {% endfor %}
+      </select>
+      <label for="filtro-municipio">Município</label>
+    </div>
+    <div class="field field--select">
+      <select id="filtro-igreja" class="select" aria-label="Igreja">
+        <option value="">Todas as igrejas</option>
+        {% for igreja in igrejas %}
+          <option value="{{ igreja.pk }}">{{ igreja }}</option>
+        {% endfor %}
+      </select>
+      <label for="filtro-igreja">Igreja</label>
+    </div>
+  </section>
+
+  <section class="kpi-grid" aria-live="polite">
+    <article class="glass-card kpi">
+      <p class="kpi__label">Membros ativos</p>
+      <p class="kpi__value" id="kpi-total">—</p>
+      <p class="kpi__hint">Validados no censo</p>
+    </article>
+    <article class="glass-card kpi">
+      <p class="kpi__label">Cobertura geográfica</p>
+      <p class="kpi__value" id="kpi-cobertura">—</p>
+      <p class="kpi__hint" id="kpi-cobertura-hint">Municípios com organização ativa</p>
+    </article>
+    <article class="glass-card kpi">
+      <p class="kpi__label">SMHB</p>
+      <p class="kpi__value" id="kpi-smhb">—</p>
+      <p class="kpi__hint">Sociedades de homens</p>
+    </article>
+    <article class="glass-card kpi">
+      <p class="kpi__label">GAM</p>
+      <p class="kpi__value" id="kpi-gam">—</p>
+      <p class="kpi__hint">Grupos de ação missionária</p>
+    </article>
+    <article class="glass-card kpi">
+      <p class="kpi__label">Embaixadores do Rei</p>
+      <p class="kpi__value" id="kpi-er">—</p>
+      <p class="kpi__hint">Meninos e adolescentes</p>
+    </article>
+  </section>
+
+  <section class="chart-grid">
+    <article class="glass-card chart-card">
+      <h2>Pirâmide etária</h2>
+      <canvas id="grafico-piramide" height="260" aria-label="Distribuição por faixa etária"></canvas>
+    </article>
+    <article class="glass-card chart-card">
+      <h2>Por organização</h2>
+      <canvas id="grafico-organizacoes" height="260" aria-label="Membros por organização"></canvas>
+    </article>
+    <article class="glass-card chart-card chart-card--wide">
+      <h2>Banco vocacional</h2>
+      <canvas id="grafico-vocacional" height="220" aria-label="Voluntários por área de atuação"></canvas>
+    </article>
+  </section>
+
+  <p class="helper helper--center" id="painel-status" role="status"></p>
+  <p class="helper helper--center">
+    Recortes com menos de 5 registros são suprimidos para preservar a privacidade (k-anonimato).
+  </p>
+{% endblock %}
+{% block extra_scripts %}
+  <script src="https://unpkg.com/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="/static/js/dashboard.js" defer></script>
+{% endblock %}

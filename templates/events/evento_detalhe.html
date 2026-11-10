@@ -2,16 +2,38 @@
 {% block title %}{{ evento.titulo }} — HDTO{% endblock %}
 {% block meta_description %}{{ evento.descricao|truncatechars:160 }}{% endblock %}
 {% block content %}
-  <article>
-    <h1>{{ evento.titulo }}</h1>
-    <p class="meta">
-      {{ evento.inicio|date:"d/m/Y H:i" }} a {{ evento.fim|date:"d/m/Y H:i" }}
-      {% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}
-    </p>
-    {% if evento.banner %}<img src="{{ evento.banner.url }}" alt="{{ evento.titulo }}" loading="lazy">{% endif %}
+  <article class="glass-card event-detail">
+    <header class="page-head">
+      <div>
+        <p class="eyebrow">{{ evento.get_tipo_display }} · {{ evento.get_abrangencia_display }}</p>
+        <h1>{{ evento.titulo }}</h1>
+        <p class="subtitle">
+          {{ evento.inicio|date:"d/m/Y H:i" }} a {{ evento.fim|date:"d/m/Y H:i" }}
+          {% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}
+        </p>
+      </div>
+    </header>
+    {% if evento.banner %}
+      <img class="event-banner" src="{{ evento.banner.url }}" alt="{{ evento.titulo }}" loading="lazy">
+    {% endif %}
     <div class="prose">{{ evento.descricao|linebreaks }}</div>
-    <p>
-      <a href="{% url 'evento-ics' evento.pk %}">Adicionar à agenda (.ics)</a>
-    </p>
+
+    <div class="button-row">
+      {% if evento.esta_aberto %}
+        {% if user.is_authenticated %}
+          {% if minha_inscricao %}
+            <span class="chip chip--success">Inscrição {{ minha_inscricao.get_status_display }}</span>
+            <a class="btn btn--filled" href="{% url 'inscricao-qr' minha_inscricao.pk %}">Abrir credencial QR</a>
+          {% else %}
+            <a class="btn btn--filled" href="{% url 'evento-inscricao' evento.pk %}">Inscrever-se</a>
+          {% endif %}
+        {% else %}
+          <a class="btn btn--filled" href="{% url 'login' %}?next={% url 'evento-inscricao' evento.pk %}">Entrar para se inscrever</a>
+        {% endif %}
+      {% else %}
+        <span class="chip">Inscrições encerradas</span>
+      {% endif %}
+      <a class="btn btn--outlined" href="{% url 'evento-ics' evento.pk %}">Adicionar à agenda</a>
+    </div>
   </article>
 {% endblock %}

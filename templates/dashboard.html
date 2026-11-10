@@ -1,7 +1,0 @@
-{% extends "base.html" %}
-{% block title %}Painel — HDTO{% endblock %}
-{% block content %}
-  <h1>Painel</h1>
-  <p>Bem-vindo, {{ user.full_name }}.</p>
-  {% if user.role %}<p>Perfil: {{ user.role.label }}</p>{% endif %}
-{% endblock %}

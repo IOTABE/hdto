@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Inscrição — {{ evento.titulo }}{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Inscrição em evento</p>
+      <h1>{{ evento.titulo }}</h1>
+      <p class="subtitle">{{ evento.inicio|date:"d/m/Y H:i" }} a {{ evento.fim|date:"d/m/Y H:i" }}{% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}</p>
+    </div>
+  </header>
+
+  <div class="glass-card form-card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include "includes/form_fields.html" %}
+      <div class="form-actions">
+        <a class="btn btn--text" href="{% url 'evento-detalhe' evento.pk %}">Voltar</a>
+        <button class="btn btn--filled" type="submit">Confirmar inscrição</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

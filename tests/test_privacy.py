@@ -24,7 +24,7 @@ def membro_com_consentimento(db):
         homologado_em=timezone.now(),
     )
     org = Organizacao.objects.create(igreja=igreja, tipo=Organizacao.Tipo.SMHB)
-    termo = TermoVersao.objects.create(versao="1.0", texto="Termo")
+    termo, _ = TermoVersao.objects.get_or_create(versao="1.0", defaults={"texto": "Termo"})
     user = User.objects.create_user(
         email="titular@example.com", password="x", full_name="Titular"
     )

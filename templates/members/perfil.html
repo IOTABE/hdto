@@ -1,38 +1,77 @@
 {% extends "base.html" %}
 {% block title %}Meu perfil — HDTO{% endblock %}
 {% block content %}
-  <h1>Meu perfil</h1>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Área do membro</p>
+      <h1>Meu perfil</h1>
+      <p class="subtitle">Gerencie seus dados, consentimentos e credenciais de eventos.</p>
+    </div>
+  </header>
+
   {% if membro %}
-    <dl class="perfil">
-      <dt>Nome</dt><dd>{{ membro.nome_completo }}</dd>
-      <dt>Status</dt><dd>{{ membro.get_status_display }}</dd>
-      <dt>Organizações</dt>
-      <dd>
-        {% for org in membro.organizacoes.all %}
-          {{ org.get_tipo_display }}{% if not forloop.last %}, {% endif %}
-        {% empty %}Nenhuma{% endfor %}
-      </dd>
-    </dl>
+    <div class="split-grid">
+      <section class="glass-card">
+        <h2>Dados cadastrais</h2>
+        <dl class="perfil">
+          <dt>Nome</dt><dd>{{ membro.nome_completo }}</dd>
+          <dt>Status</dt><dd><span class="chip">{{ membro.get_status_display }}</span></dd>
+          <dt>Organizações</dt>
+          <dd>
+            {% for org in membro.organizacoes.all %}
+              {{ org.get_tipo_display }}{% if not forloop.last %}, {% endif %}
+            {% empty %}Nenhuma{% endfor %}
+          </dd>
+          <dt>E-mail</dt><dd>{{ membro.email|default:"—" }}</dd>
+          <dt>Telefone</dt><dd>{{ membro.telefone|default:"—" }}</dd>
+        </dl>
+      </section>
 
-    <h2>Consentimentos</h2>
-    <ul>
-      {% for consentimento in consentimentos %}
-        <li>{{ consentimento.termo.versao }} — {{ consentimento.criado_em|date:"d/m/Y H:i" }}</li>
-      {% empty %}
-        <li>Nenhum consentimento registrado.</li>
-      {% endfor %}
-    </ul>
+      <section class="glass-card">
+        <h2>Consentimentos</h2>
+        <ul class="plain-list">
+          {% for consentimento in consentimentos %}
+            <li>
+              <strong>Termo {{ consentimento.termo.versao }}</strong>
+              <span class="meta">{{ consentimento.criado_em|date:"d/m/Y H:i" }}</span>
+            </li>
+          {% empty %}
+            <li class="meta">Nenhum consentimento registrado.</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
 
-    <h2>Privacidade</h2>
-    <p>Ao revogar o consentimento, seus dados pessoais serão anonimizados e sua conta inativada, preservando apenas registros obrigatórios por lei.</p>
-    <form method="post" action="{% url 'revogar-consentimento' %}">
-      {% csrf_token %}
-      <label>Motivo (opcional)
-        <textarea name="motivo" rows="3"></textarea>
-      </label>
-      <button type="submit">Revogar consentimento e anonimizar meus dados</button>
-    </form>
+    <section class="glass-card" style="margin-top: 1rem;">
+      <h2>Minhas inscrições</h2>
+      <ul class="plain-list">
+        {% for inscricao in inscricoes %}
+          <li>
+            <span>{{ inscricao.evento.titulo }} — {{ inscricao.get_status_display }}</span>
+            <a class="btn btn--outlined btn--sm" href="{% url 'inscricao-qr' inscricao.pk %}">QR Code</a>
+          </li>
+        {% empty %}
+          <li class="meta">Nenhuma inscrição. <a href="{% url 'evento-lista' %}">Ver eventos</a>.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="glass-card" style="margin-top: 1rem;">
+      <h2>Privacidade e LGPD</h2>
+      <p>Ao revogar o consentimento, seus dados pessoais serão anonimizados e sua conta inativada, preservando apenas registros obrigatórios por lei.</p>
+      <form method="post" action="{% url 'revogar-consentimento' %}">
+        {% csrf_token %}
+        <div class="field">
+          <textarea id="id_motivo" name="motivo" class="input textarea" rows="3" placeholder=" "></textarea>
+          <label for="id_motivo">Motivo (opcional)</label>
+        </div>
+        <button class="btn btn--danger" type="submit">Revogar consentimento e anonimizar meus dados</button>
+      </form>
+    </section>
   {% else %}
-    <p>Não há cadastro de membro vinculado a esta conta.</p>
+    <div class="glass-card form-card">
+      <p>Não há cadastro de membro vinculado a esta conta.</p>
+      <a class="btn btn--filled" href="{% url 'membro-novo' %}">Fazer cadastro</a>
+    </div>
   {% endif %}
 {% endblock %}
