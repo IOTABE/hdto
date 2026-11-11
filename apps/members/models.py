@@ -86,6 +86,14 @@ class Membro(TimeStampedModel):
     email = models.EmailField("e-mail", blank=True)
     telefone = models.CharField("telefone", max_length=20, blank=True)
     endereco = models.CharField("endereço residencial", max_length=255, blank=True)
+    igreja = models.ForeignKey(
+        "institutions.Igreja",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="membros",
+        verbose_name="igreja",
+    )
     organizacoes = models.ManyToManyField(
         "institutions.Organizacao",
         related_name="membros",

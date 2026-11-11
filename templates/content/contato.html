@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Contato — HB-TO{% endblock %}
+{% block meta_description %}Fale com os Homens Batistas do Tocantins.{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Institucional</p>
+      <h1>Contato</h1>
+      <p class="subtitle">Escolha como deseja enviar sua mensagem: e-mail, WhatsApp ou registro local.</p>
+    </div>
+  </header>
+
+  <div class="contato-grid">
+    <section class="glass-card contato-info">
+      <h2>Canais de atendimento</h2>
+      {% if contact_email %}
+        <p>
+          <strong>E-mail</strong><br>
+          <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+        </p>
+      {% endif %}
+      {% if whatsapp_url %}
+        <p>
+          <strong>WhatsApp</strong><br>
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener">Iniciar conversa</a>
+        </p>
+      {% endif %}
+      <p class="helper">
+        Você também pode registrar a mensagem localmente. A equipe receberá o contato
+        pelo painel administrativo.
+      </p>
+    </section>
+
+    <div class="glass-card form-card">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% include "includes/form_fields.html" %}
+        <div class="form-actions">
+          <button class="btn btn--filled" type="submit">Enviar contato</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

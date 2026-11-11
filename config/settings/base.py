@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.gis",
     "rest_framework",
     "django_filters",
+    "captcha",
     "apps.core",
     "apps.accounts",
     "apps.geo",
@@ -37,6 +38,19 @@ INSTALLED_APPS = [
 ]
 
 CENSO_K_ANONIMATO = int(env("CENSO_K_ANONIMATO", default="5"))
+
+# Contato institucional exibido e usado no envio de mensagens.
+CONTACT_EMAIL = env("CONTACT_EMAIL", default="")
+CONTACT_WHATSAPP = env("CONTACT_WHATSAPP", default="")
+
+# django-simple-captcha (imagem gerada localmente, sem servidores externos).
+CAPTCHA_IMAGE_SIZE = (220, 70)
+CAPTCHA_FONT_SIZE = 30
+CAPTCHA_LETTER_ROTATION = (-18, 18)
+CAPTCHA_BACKGROUND_COLOR = "#ffffff"
+CAPTCHA_FOREGROUND_COLOR = "#1e3a5f"
+CAPTCHA_NOISE_FUNCTIONS = ("captcha.helpers.noise_arcs", "captcha.helpers.noise_dots")
+CAPTCHA_FILTER_FUNCTIONS = ("captcha.helpers.post_smooth",)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

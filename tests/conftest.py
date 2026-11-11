@@ -8,6 +8,18 @@ def crypto_settings(settings):
     settings.CPF_HASH_PEPPER = "test-pepper"
 
 
+@pytest.fixture(autouse=True)
+def captcha_test_mode(monkeypatch):
+    monkeypatch.setattr("captcha.conf.settings.CAPTCHA_TEST_MODE", True)
+
+
+@pytest.fixture
+def captcha_data(db):
+    from captcha.models import CaptchaStore
+
+    return {"captcha_0": CaptchaStore.generate_key(), "captcha_1": "PASSED"}
+
+
 @pytest.fixture
 def user(db):
     from apps.accounts.models import User

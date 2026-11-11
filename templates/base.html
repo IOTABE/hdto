@@ -34,6 +34,19 @@
         <a href="{% url 'mapa' %}">Mapa</a>
         {% if pode_gerir_cadastros %}
           <a href="{% url 'dashboard' %}">Painel</a>
+        {% endif %}
+        <details class="nav-menu">
+          <summary class="nav-menu__trigger">
+            Institucional
+            <span class="nav-menu__caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="nav-menu__panel">
+            <a href="{% url 'historia' %}">História</a>
+            <a href="{% url 'diretoria' %}">Diretoria</a>
+            <a href="{% url 'contato' %}">Contato</a>
+          </div>
+        </details>
+        {% if pode_gerir_cadastros %}
           <a href="{% url 'igreja-nova' %}">Igreja</a>
           <a href="{% url 'organizacao-nova' %}">Organização</a>
         {% endif %}

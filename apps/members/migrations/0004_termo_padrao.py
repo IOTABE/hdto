@@ -8,8 +8,8 @@ def criar_termo_padrao(apps, schema_editor):
         defaults={
             "texto": (
                 "Autorizo o tratamento dos meus dados pessoais, incluindo a filiação a "
-                "organização religiosa, para fins de cadastro, censo e comunicação da "
-                "União Missionária de Homens Batistas do Tocantins, nos termos da LGPD."
+                "organização religiosa, para fins de cadastro, censo e comunicação dos "
+                "Homens Batistas do Tocantins, nos termos da LGPD."
             ),
             "vigente": True,
         },

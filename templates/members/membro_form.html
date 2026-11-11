@@ -34,7 +34,8 @@
       </section>
 
       <section class="form-section">
-        <h2>Organizações</h2>
+        <h2>Igreja e organizações</h2>
+        {% include "includes/field.html" with field=form.igreja %}
         {% include "includes/field.html" with field=form.organizacoes %}
       </section>
 
@@ -52,7 +53,20 @@
 
       <section class="form-section">
         <h2>Consentimento</h2>
+        {% if termo %}
+          <details class="consent-term">
+            <summary>Ler o termo de consentimento — versão {{ termo.versao }}</summary>
+            <div class="consent-term__body prose">
+              {{ termo.texto|linebreaks }}
+            </div>
+          </details>
+        {% else %}
+          <div class="form-alert" role="alert">
+            <p>Não há termo de consentimento vigente. Procure a liderança da organização.</p>
+          </div>
+        {% endif %}
         {% include "includes/field.html" with field=form.consentimento %}
+        {% include "includes/captcha_field.html" with field=form.captcha %}
       </section>
 
       <div class="form-actions">

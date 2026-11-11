@@ -21,6 +21,15 @@
     });
   }
 
+  document.querySelectorAll("details.nav-menu").forEach((menu) => {
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target)) menu.open = false;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") menu.open = false;
+    });
+  });
+
   document.querySelectorAll(".field .input").forEach((input) => {
     if (input.value) input.classList.add("has-value");
     input.addEventListener("change", () => {

@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import timezone
@@ -7,7 +8,7 @@ from apps.core.forms import MaterialFormMixin
 from apps.core.validators import validate_cpf
 
 from .models import Membro, ResponsavelLegal, TermoVersao
-from .scoping import organizacoes_para_cadastro
+from .scoping import igrejas_para_cadastro, organizacoes_para_cadastro
 
 
 def calcular_idade(nascimento, referencia=None):
@@ -33,6 +34,7 @@ class MembroForm(MaterialFormMixin, forms.ModelForm):
         label="Li e concordo com o termo de consentimento para tratamento dos dados.",
         required=True,
     )
+    captcha = CaptchaField(label="Verificação antirobô")
 
     class Meta:
         model = Membro
@@ -46,6 +48,7 @@ class MembroForm(MaterialFormMixin, forms.ModelForm):
             "email",
             "telefone",
             "endereco",
+            "igreja",
             "organizacoes",
         ]
         widgets = {
@@ -63,8 +66,13 @@ class MembroForm(MaterialFormMixin, forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.user = user
         self.ip = ip
+        self.fields["igreja"].queryset = igrejas_para_cadastro(user)
+        self.fields["igreja"].required = True
+        self.fields["igreja"].help_text = "Igreja à qual o membro será vinculado."
         self.fields["organizacoes"].queryset = organizacoes_para_cadastro(user)
-        self.fields["organizacoes"].help_text = "Selecione ao menos uma organização ativa."
+        self.fields["organizacoes"].help_text = (
+            "Selecione ao menos uma organização ativa da igreja escolhida."
+        )
 
     def clean(self):
         dados = super().clean()
@@ -99,8 +107,15 @@ class MembroForm(MaterialFormMixin, forms.ModelForm):
                 except ValidationError as exc:
                     self.add_error("responsavel_cpf", exc)
 
-        if not dados.get("organizacoes"):
+        igreja = dados.get("igreja")
+        organizacoes = dados.get("organizacoes")
+        if not organizacoes:
             self.add_error("organizacoes", "Selecione ao menos uma organização ativa.")
+        elif igreja and any(org.igreja_id != igreja.pk for org in organizacoes):
+            self.add_error(
+                "organizacoes",
+                "Selecione organizações pertencentes à igreja escolhida.",
+            )
 
         if TermoVersao.vigente_atual() is None:
             self.add_error(

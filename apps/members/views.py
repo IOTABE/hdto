@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from apps.core.utils import get_client_ip
 
 from .forms import MembroForm
+from .models import TermoVersao
 from .services import revogar_consentimento
 
 
@@ -36,6 +37,7 @@ def membro_novo(request):
         messages.info(request, "Sua conta já possui cadastro de membro.")
         return redirect("meu-perfil")
 
+    termo = TermoVersao.vigente_atual()
     form = MembroForm(
         request.POST or None,
         user=request.user if request.user.is_authenticated else None,
@@ -50,4 +52,4 @@ def membro_novo(request):
         if request.user.is_authenticated:
             return redirect("meu-perfil")
         return render(request, "members/membro_sucesso.html", {"membro": membro})
-    return render(request, "members/membro_form.html", {"form": form})
+    return render(request, "members/membro_form.html", {"form": form, "termo": termo})

@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 
 from apps.accounts.roles import Role
@@ -24,6 +25,7 @@ class IgrejaForm(MaterialFormMixin, forms.ModelForm):
     longitude = forms.DecimalField(
         label="Longitude", max_digits=9, decimal_places=6, required=False
     )
+    captcha = CaptchaField(label="Verificação antirobô")
 
     class Meta:
         model = Igreja
@@ -93,6 +95,8 @@ class IgrejaForm(MaterialFormMixin, forms.ModelForm):
 
 
 class OrganizacaoForm(MaterialFormMixin, forms.ModelForm):
+    captcha = CaptchaField(label="Verificação antirobô")
+
     class Meta:
         model = Organizacao
         fields = [

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Diretoria — HB-TO{% endblock %}
+{% block meta_description %}Diretoria bienal dos Homens Batistas do Tocantins.{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Institucional</p>
+      <h1>Diretoria</h1>
+      <p class="subtitle">Composição da diretoria por biênio.</p>
+    </div>
+  </header>
+
+  {% for grupo in grupos %}
+    <section class="home-section" aria-labelledby="bienio-{{ grupo.inicio }}">
+      <div class="section-head">
+        <h2 id="bienio-{{ grupo.inicio }}">Gestão {{ grupo.rotulo }}</h2>
+        {% if forloop.first %}<span class="chip chip--success">Gestão atual</span>{% endif %}
+      </div>
+      <div class="diretoria-grid">
+        {% for membro in grupo.membros %}
+          <article class="glass-card diretor-card">
+            {% if membro.foto %}
+              <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}" loading="lazy">
+            {% endif %}
+            <h3>{{ membro.nome }}</h3>
+            <p class="eyebrow">{{ membro.cargo }}</p>
+            {% if membro.bio %}<p>{{ membro.bio|linebreaksbr }}</p>{% endif %}
+            {% if membro.email or membro.telefone %}
+              <p class="meta">
+                {% if membro.email %}<a href="mailto:{{ membro.email }}">{{ membro.email }}</a>{% endif %}
+                {% if membro.email and membro.telefone %} · {% endif %}
+                {% if membro.telefone %}{{ membro.telefone }}{% endif %}
+              </p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% empty %}
+    <p class="glass-card empty-state">Nenhum membro da diretoria publicado.</p>
+  {% endfor %}
+{% endblock %}

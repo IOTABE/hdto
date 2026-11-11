@@ -7,6 +7,7 @@ from apps.members.views import membro_novo
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("captcha/", include("captcha.urls")),
     path("contas/", include("apps.accounts.urls")),
     path("conta/", include("apps.members.urls")),
     path("cadastro/membro/", membro_novo, name="membro-novo"),

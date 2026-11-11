@@ -17,9 +17,10 @@ class ResponsavelLegalAdmin(admin.ModelAdmin):
 
 @admin.register(Membro)
 class MembroAdmin(admin.ModelAdmin):
-    list_display = ["nome_completo", "idade", "status", "profissao", "responsavel"]
-    list_filter = ["status", "estado_civil", "organizacoes"]
-    search_fields = ["nome_completo", "cpf_hash", "email"]
+    list_display = ["nome_completo", "igreja", "idade", "status", "profissao", "responsavel"]
+    list_filter = ["status", "estado_civil", "igreja", "organizacoes"]
+    search_fields = ["nome_completo", "cpf_hash", "email", "igreja__nome_fantasia"]
+    list_select_related = ["igreja", "responsavel"]
     filter_horizontal = ["organizacoes"]
     exclude = ["cpf_hash"]
     readonly_fields = ["status"]

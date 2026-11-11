@@ -1,4 +1,6 @@
-{% if field.field.widget.input_type == "checkbox" %}
+{% if field.name == "captcha" %}
+  {% include "includes/captcha_field.html" with field=field %}
+{% elif field.field.widget.input_type == "checkbox" %}
   <label class="checkbox-field {% if field.errors %}field--error{% endif %}">
     {{ field }}
     <span>{{ field.label }}</span>

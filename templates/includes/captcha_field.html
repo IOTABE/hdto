@@ -1,0 +1,6 @@
+<div class="field field--captcha {% if field.errors %}field--error{% endif %}">
+  <label class="captcha-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="captcha-widget">{{ field }}</div>
+  <p class="helper">Digite os caracteres exibidos na imagem.</p>
+  {% for error in field.errors %}<p class="error">{{ error }}</p>{% endfor %}
+</div>

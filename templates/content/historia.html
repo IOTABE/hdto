@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}História — HB-TO{% endblock %}
+{% block meta_description %}Conheça a história dos Homens Batistas do Tocantins.{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Institucional</p>
+      <h1>História</h1>
+      <p class="subtitle">A trajetória do trabalho masculino batista no Tocantins.</p>
+    </div>
+  </header>
+
+  <div class="content-stack">
+    {% for registro in registros %}
+      <article class="glass-card content-card">
+        <header class="page-head">
+          <div>
+            <h2>{{ registro.titulo }}</h2>
+            {% if registro.resumo %}<p class="lead">{{ registro.resumo }}</p>{% endif %}
+          </div>
+        </header>
+        {% if registro.imagem %}
+          <img class="article-cover" src="{{ registro.imagem.url }}" alt="{{ registro.titulo }}" loading="lazy">
+        {% endif %}
+        <div class="prose">{{ registro.conteudo|linebreaks }}</div>
+      </article>
+    {% empty %}
+      <p class="glass-card empty-state">Nenhum conteúdo de história publicado.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

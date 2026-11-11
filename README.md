@@ -74,6 +74,12 @@ SPATIALITE_LIBRARY_PATH=/usr/lib/mod_spatialite.so
 docker compose run --rm web sh -c "uv sync --frozen && uv run ruff check . && uv run pytest"
 ```
 
+### Captcha
+
+O formulário de cadastro usa o **django-simple-captcha**: a imagem é gerada localmente pelo próprio Django/Pillow, sem depender de servidores externos nem de chaves de API. Não é necessária nenhuma configuração adicional.
+
+A imagem é servida por `/captcha/image/<chave>/` e expira conforme `CAPTCHA_TIMEOUT` (padrão: 5 minutos). Em testes automatizados, `CAPTCHA_TEST_MODE` aceita a resposta `PASSED`.
+
 ### Comandos úteis
 
 ```bash
@@ -93,6 +99,9 @@ docker compose run --rm web uv run python manage.py importar_municipios_to --arq
 | Método | Rota | Descrição |
 |---|---|---|
 | GET | `/` | Portal público |
+| GET | `/institucional/historia/` | História institucional |
+| GET | `/institucional/diretoria/` | Diretoria por biênio |
+| GET/POST | `/institucional/contato/` | Contato por e-mail, WhatsApp ou registro local |
 | GET | `/institucional/<slug>/` | Página institucional |
 | GET | `/noticias/` | Notícias publicadas |
 | GET | `/eventos/` | Próximos eventos |
@@ -120,7 +129,7 @@ cp .env.example .env   # preencha segredos e DB_*
 ./scripts/deploy.sh
 ```
 
-Variáveis essenciais: `SECRET_KEY`, `FIELD_ENCRYPTION_KEY`, `CPF_HASH_PEPPER`, `DB_*` (porta **5434**).
+Variáveis essenciais: `SECRET_KEY`, `FIELD_ENCRYPTION_KEY`, `CPF_HASH_PEPPER`, `DB_*` (porta **5434**). O captcha usa `django-simple-captcha` e não requer variáveis de ambiente.
 
 ## Interface
 

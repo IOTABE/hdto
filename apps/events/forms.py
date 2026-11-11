@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -10,6 +11,7 @@ from .models import Inscricao
 
 class InscricaoForm(MaterialFormMixin, forms.Form):
     membro = forms.ModelChoiceField(queryset=Membro.objects.none(), label="Quem vai se inscrever")
+    captcha = CaptchaField(label="Verificação antirobô")
 
     def __init__(self, *args, user, evento, **kwargs):
         super().__init__(*args, **kwargs)
