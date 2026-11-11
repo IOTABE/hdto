@@ -106,8 +106,7 @@ curl -fsS https://hdto.exemplo.org.br/health/
 docker compose -f docker-compose.prod.yml run --rm web python manage.py createsuperuser
 
 # malha municipal do IBGE (139 municípios)
-docker compose -f docker-compose.prod.yml run --rm web \
-  python manage.py importar_municipios_to --arquivo /app/dados/municipios_to.geojson
+docker compose -f docker-compose.prod.yml run --rm web up
 
 # termo de consentimento vigente
 docker compose -f docker-compose.prod.yml run --rm web python manage.py shell -c \
