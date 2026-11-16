@@ -15,7 +15,7 @@
 
     <header class="app-bar glass">
       <a class="brand" href="{% url 'home' %}" aria-label="HDTO — início">
-        <span class="brand__mark" aria-hidden="true">H</span>
+        <img class="brand__logo" src="{% static 'HBatistas.png' %}" alt="" height="40">
         <span class="brand__text">HB-TO<small>Homens Batistas do Tocantins</small></span>
       </a>
 
@@ -85,6 +85,11 @@
     </main>
 
     <footer class="site-footer">
+      <div class="site-footer__logos" aria-label="Organizações">
+        <img class="site-footer__logo" src="{% static 'Hdiscipulos.png' %}" alt="Homens Discípulos" height="44">
+        <img class="site-footer__logo" src="{% static 'ERValentes.png' %}" alt="Embaixadores do Rei Valentes" height="44">
+        <img class="site-footer__logo" src="{% static 'ER.png' %}" alt="Embaixadores do Rei" height="44">
+      </div>
       <p>Homens Batistas do Tocantins — Convenção Batista do Tocantins</p>
       <p class="site-footer__muted">Dados tratados conforme a LGPD.</p>
     </footer>
