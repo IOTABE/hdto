@@ -92,6 +92,11 @@ docker compose run --rm web uv run python manage.py createsuperuser
 
 # importar os 139 municípios do TO (GeoJSON do IBGE)
 docker compose run --rm web uv run python manage.py importar_municipios_to --arquivo /caminho/municipios.geojson
+
+# GeoJSON só com geometria (sem código/nome): usa a referência local embutida
+docker compose run --rm web uv run python manage.py importar_municipios_to \
+  --arquivo /caminho/municipios.geojson \
+  --referencia apps/geo/data/municipios_to_referencia.json
 ```
 
 ## Endpoints principais

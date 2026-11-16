@@ -8,6 +8,7 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 
+from apps.geo.management.commands.importar_municipios_to import REFERENCIA_PADRAO
 from apps.geo.models import Municipio
 from apps.institutions.models import AssociacaoRegional, Igreja, Organizacao
 
@@ -144,6 +145,126 @@ def test_importar_municipios_busca_nome_no_ibge(tmp_path):
         return_value=localidades,
     ):
         call_command("importar_municipios_to", arquivo=str(arquivo))
+
+    assert Municipio.objects.get(codigo_ibge="1721000").nome == "Palmas"
+
+
+@pytest.mark.django_db
+def test_importar_municipios_sem_propriedades_usa_referencia(tmp_path):
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [-48.4, -10.3],
+                            [-48.2, -10.3],
+                            [-48.2, -10.1],
+                            [-48.4, -10.1],
+                            [-48.4, -10.3],
+                        ]
+                    ],
+                },
+            }
+        ],
+    }
+    arquivo = tmp_path / "municipios.geojson"
+    arquivo.write_text(json.dumps(geojson), encoding="utf-8")
+    referencia = tmp_path / "referencia.json"
+    referencia.write_text(
+        json.dumps(
+            [{"codigo_ibge": "1721000", "nome": "Palmas", "ponto": [-48.3, -10.2]}]
+        ),
+        encoding="utf-8",
+    )
+
+    call_command(
+        "importar_municipios_to",
+        arquivo=str(arquivo),
+        referencia=str(referencia),
+    )
+
+    municipio = Municipio.objects.get(codigo_ibge="1721000")
+    assert municipio.nome == "Palmas"
+    assert municipio.geom is not None
+
+
+@pytest.mark.django_db
+def test_importar_municipios_sem_propriedades_usa_referencia_padrao(tmp_path):
+    referencias = json.loads(REFERENCIA_PADRAO.read_text(encoding="utf-8"))
+    palmas = next(item for item in referencias if item["codigo_ibge"] == "1721000")
+    lon, lat = palmas["ponto"]
+    delta = 0.01
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [lon - delta, lat - delta],
+                            [lon + delta, lat - delta],
+                            [lon + delta, lat + delta],
+                            [lon - delta, lat + delta],
+                            [lon - delta, lat - delta],
+                        ]
+                    ],
+                },
+            }
+        ],
+    }
+    arquivo = tmp_path / "municipios.geojson"
+    arquivo.write_text(json.dumps(geojson), encoding="utf-8")
+
+    call_command("importar_municipios_to", arquivo=str(arquivo))
+
+    assert Municipio.objects.get(codigo_ibge="1721000").nome == "Palmas"
+
+
+@pytest.mark.django_db
+def test_importar_municipios_com_id_no_feature(tmp_path):
+    geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "id": "1721000",
+                "properties": {},
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [-48.4, -10.3],
+                            [-48.2, -10.3],
+                            [-48.2, -10.1],
+                            [-48.4, -10.1],
+                            [-48.4, -10.3],
+                        ]
+                    ],
+                },
+            }
+        ],
+    }
+    arquivo = tmp_path / "municipios.geojson"
+    arquivo.write_text(json.dumps(geojson), encoding="utf-8")
+    referencia = tmp_path / "referencia.json"
+    referencia.write_text(
+        json.dumps([{"codigo_ibge": "1721000", "nome": "Palmas", "ponto": [-48.3, -10.2]}]),
+        encoding="utf-8",
+    )
+
+    call_command(
+        "importar_municipios_to",
+        arquivo=str(arquivo),
+        referencia=str(referencia),
+    )
 
     assert Municipio.objects.get(codigo_ibge="1721000").nome == "Palmas"
 

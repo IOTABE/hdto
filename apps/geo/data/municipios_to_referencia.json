@@ -1,0 +1,1114 @@
+[
+  {
+    "codigo_ibge": "1700251",
+    "nome": "Abreulândia",
+    "ponto": [
+      -49.345079,
+      -9.46005
+    ]
+  },
+  {
+    "codigo_ibge": "1700301",
+    "nome": "Aguiarnópolis",
+    "ponto": [
+      -47.504303,
+      -6.5009
+    ]
+  },
+  {
+    "codigo_ibge": "1700350",
+    "nome": "Aliança do Tocantins",
+    "ponto": [
+      -48.940247,
+      -11.35765
+    ]
+  },
+  {
+    "codigo_ibge": "1700400",
+    "nome": "Almas",
+    "ponto": [
+      -47.290902,
+      -11.47525
+    ]
+  },
+  {
+    "codigo_ibge": "1700707",
+    "nome": "Alvorada",
+    "ponto": [
+      -49.114398,
+      -12.40845
+    ]
+  },
+  {
+    "codigo_ibge": "1701002",
+    "nome": "Ananás",
+    "ponto": [
+      -48.205921,
+      -6.19815
+    ]
+  },
+  {
+    "codigo_ibge": "1701051",
+    "nome": "Angico",
+    "ponto": [
+      -47.897985,
+      -6.42205
+    ]
+  },
+  {
+    "codigo_ibge": "1701101",
+    "nome": "Aparecida do Rio Negro",
+    "ponto": [
+      -48.025716,
+      -9.9726
+    ]
+  },
+  {
+    "codigo_ibge": "1701309",
+    "nome": "Aragominas",
+    "ponto": [
+      -48.52486,
+      -6.9876
+    ]
+  },
+  {
+    "codigo_ibge": "1701903",
+    "nome": "Araguacema",
+    "ponto": [
+      -49.573678,
+      -8.9078
+    ]
+  },
+  {
+    "codigo_ibge": "1702000",
+    "nome": "Araguaçu",
+    "ponto": [
+      -49.778759,
+      -12.83995
+    ]
+  },
+  {
+    "codigo_ibge": "1702109",
+    "nome": "Araguaína",
+    "ponto": [
+      -48.278715,
+      -7.25215
+    ]
+  },
+  {
+    "codigo_ibge": "1702158",
+    "nome": "Araguanã",
+    "ponto": [
+      -48.554252,
+      -6.7345
+    ]
+  },
+  {
+    "codigo_ibge": "1702208",
+    "nome": "Araguatins",
+    "ponto": [
+      -48.009516,
+      -5.6424
+    ]
+  },
+  {
+    "codigo_ibge": "1702307",
+    "nome": "Arapoema",
+    "ponto": [
+      -49.008386,
+      -7.7306
+    ]
+  },
+  {
+    "codigo_ibge": "1702406",
+    "nome": "Arraias",
+    "ponto": [
+      -46.92198,
+      -12.8187
+    ]
+  },
+  {
+    "codigo_ibge": "1702554",
+    "nome": "Augustinópolis",
+    "ponto": [
+      -47.922211,
+      -5.52195
+    ]
+  },
+  {
+    "codigo_ibge": "1702703",
+    "nome": "Aurora do Tocantins",
+    "ponto": [
+      -46.491205,
+      -12.6373
+    ]
+  },
+  {
+    "codigo_ibge": "1702901",
+    "nome": "Axixá do Tocantins",
+    "ponto": [
+      -47.763959,
+      -5.68135
+    ]
+  },
+  {
+    "codigo_ibge": "1703008",
+    "nome": "Babaçulândia",
+    "ponto": [
+      -47.911492,
+      -7.1631
+    ]
+  },
+  {
+    "codigo_ibge": "1703057",
+    "nome": "Bandeirantes do Tocantins",
+    "ponto": [
+      -48.71054,
+      -7.9906
+    ]
+  },
+  {
+    "codigo_ibge": "1703073",
+    "nome": "Barra do Ouro",
+    "ponto": [
+      -47.642721,
+      -7.7135
+    ]
+  },
+  {
+    "codigo_ibge": "1703107",
+    "nome": "Barrolândia",
+    "ponto": [
+      -48.779427,
+      -9.89775
+    ]
+  },
+  {
+    "codigo_ibge": "1703206",
+    "nome": "Bernardo Sayão",
+    "ponto": [
+      -48.989327,
+      -7.9906
+    ]
+  },
+  {
+    "codigo_ibge": "1703305",
+    "nome": "Bom Jesus do Tocantins",
+    "ponto": [
+      -47.864815,
+      -9.00045
+    ]
+  },
+  {
+    "codigo_ibge": "1703602",
+    "nome": "Brasilândia do Tocantins",
+    "ponto": [
+      -48.460357,
+      -8.27505
+    ]
+  },
+  {
+    "codigo_ibge": "1703701",
+    "nome": "Brejinho de Nazaré",
+    "ponto": [
+      -48.691309,
+      -11.0691
+    ]
+  },
+  {
+    "codigo_ibge": "1703800",
+    "nome": "Buriti do Tocantins",
+    "ponto": [
+      -48.148595,
+      -5.34765
+    ]
+  },
+  {
+    "codigo_ibge": "1703826",
+    "nome": "Cachoeirinha",
+    "ponto": [
+      -47.844483,
+      -6.096
+    ]
+  },
+  {
+    "codigo_ibge": "1703842",
+    "nome": "Campos Lindos",
+    "ponto": [
+      -46.770162,
+      -8.2123
+    ]
+  },
+  {
+    "codigo_ibge": "1703867",
+    "nome": "Cariri do Tocantins",
+    "ponto": [
+      -49.143184,
+      -11.94185
+    ]
+  },
+  {
+    "codigo_ibge": "1703883",
+    "nome": "Carmolândia",
+    "ponto": [
+      -48.375195,
+      -7.0368
+    ]
+  },
+  {
+    "codigo_ibge": "1703891",
+    "nome": "Carrasco Bonito",
+    "ponto": [
+      -48.005058,
+      -5.3275
+    ]
+  },
+  {
+    "codigo_ibge": "1703909",
+    "nome": "Caseara",
+    "ponto": [
+      -49.847848,
+      -9.37255
+    ]
+  },
+  {
+    "codigo_ibge": "1704105",
+    "nome": "Centenário",
+    "ponto": [
+      -47.437161,
+      -9.0744
+    ]
+  },
+  {
+    "codigo_ibge": "1704600",
+    "nome": "Chapada de Areia",
+    "ponto": [
+      -49.166406,
+      -10.17215
+    ]
+  },
+  {
+    "codigo_ibge": "1705102",
+    "nome": "Chapada da Natividade",
+    "ponto": [
+      -47.828324,
+      -11.5135
+    ]
+  },
+  {
+    "codigo_ibge": "1705508",
+    "nome": "Colinas do Tocantins",
+    "ponto": [
+      -48.538284,
+      -8.0697
+    ]
+  },
+  {
+    "codigo_ibge": "1705557",
+    "nome": "Combinado",
+    "ponto": [
+      -46.490178,
+      -12.8369
+    ]
+  },
+  {
+    "codigo_ibge": "1705607",
+    "nome": "Conceição do Tocantins",
+    "ponto": [
+      -47.287213,
+      -12.148
+    ]
+  },
+  {
+    "codigo_ibge": "1706001",
+    "nome": "Couto Magalhães",
+    "ponto": [
+      -49.165553,
+      -8.4281
+    ]
+  },
+  {
+    "codigo_ibge": "1706100",
+    "nome": "Cristalândia",
+    "ponto": [
+      -49.311865,
+      -10.6381
+    ]
+  },
+  {
+    "codigo_ibge": "1706258",
+    "nome": "Crixás do Tocantins",
+    "ponto": [
+      -49.062084,
+      -11.15145
+    ]
+  },
+  {
+    "codigo_ibge": "1706506",
+    "nome": "Darcinópolis",
+    "ponto": [
+      -47.710833,
+      -6.7721
+    ]
+  },
+  {
+    "codigo_ibge": "1707009",
+    "nome": "Dianópolis",
+    "ponto": [
+      -46.977913,
+      -11.79525
+    ]
+  },
+  {
+    "codigo_ibge": "1707108",
+    "nome": "Divinópolis do Tocantins",
+    "ponto": [
+      -49.41052,
+      -9.6404
+    ]
+  },
+  {
+    "codigo_ibge": "1707207",
+    "nome": "Dois Irmãos do Tocantins",
+    "ponto": [
+      -49.020159,
+      -9.33215
+    ]
+  },
+  {
+    "codigo_ibge": "1707306",
+    "nome": "Dueré",
+    "ponto": [
+      -49.400252,
+      -11.3753
+    ]
+  },
+  {
+    "codigo_ibge": "1707405",
+    "nome": "Esperantina",
+    "ponto": [
+      -48.49433,
+      -5.30975
+    ]
+  },
+  {
+    "codigo_ibge": "1707553",
+    "nome": "Fátima",
+    "ponto": [
+      -48.899184,
+      -10.8351
+    ]
+  },
+  {
+    "codigo_ibge": "1707652",
+    "nome": "Figueirópolis",
+    "ponto": [
+      -49.417924,
+      -12.23945
+    ]
+  },
+  {
+    "codigo_ibge": "1707702",
+    "nome": "Filadélfia",
+    "ponto": [
+      -47.864027,
+      -7.5045
+    ]
+  },
+  {
+    "codigo_ibge": "1708205",
+    "nome": "Formoso do Araguaia",
+    "ponto": [
+      -50.369756,
+      -12.1194
+    ]
+  },
+  {
+    "codigo_ibge": "1708254",
+    "nome": "Tabocão",
+    "ponto": [
+      -48.579671,
+      -9.09115
+    ]
+  },
+  {
+    "codigo_ibge": "1708304",
+    "nome": "Goianorte",
+    "ponto": [
+      -49.018106,
+      -8.9189
+    ]
+  },
+  {
+    "codigo_ibge": "1709005",
+    "nome": "Goiatins",
+    "ponto": [
+      -47.476248,
+      -8.02395
+    ]
+  },
+  {
+    "codigo_ibge": "1709302",
+    "nome": "Guaraí",
+    "ponto": [
+      -48.369598,
+      -8.76675
+    ]
+  },
+  {
+    "codigo_ibge": "1709500",
+    "nome": "Gurupi",
+    "ponto": [
+      -48.921898,
+      -11.65735
+    ]
+  },
+  {
+    "codigo_ibge": "1709807",
+    "nome": "Ipueiras",
+    "ponto": [
+      -48.421321,
+      -11.1197
+    ]
+  },
+  {
+    "codigo_ibge": "1710508",
+    "nome": "Itacajá",
+    "ponto": [
+      -47.615902,
+      -8.50255
+    ]
+  },
+  {
+    "codigo_ibge": "1710706",
+    "nome": "Itaguatins",
+    "ponto": [
+      -47.604704,
+      -5.7893
+    ]
+  },
+  {
+    "codigo_ibge": "1710904",
+    "nome": "Itapiratins",
+    "ponto": [
+      -48.047607,
+      -8.3006
+    ]
+  },
+  {
+    "codigo_ibge": "1711100",
+    "nome": "Itaporã do Tocantins",
+    "ponto": [
+      -48.765433,
+      -8.44555
+    ]
+  },
+  {
+    "codigo_ibge": "1711506",
+    "nome": "Jaú do Tocantins",
+    "ponto": [
+      -48.67778,
+      -12.8572
+    ]
+  },
+  {
+    "codigo_ibge": "1711803",
+    "nome": "Juarina",
+    "ponto": [
+      -49.095878,
+      -8.1325
+    ]
+  },
+  {
+    "codigo_ibge": "1711902",
+    "nome": "Lagoa da Confusão",
+    "ponto": [
+      -50.218919,
+      -11.0483
+    ]
+  },
+  {
+    "codigo_ibge": "1711951",
+    "nome": "Lagoa do Tocantins",
+    "ponto": [
+      -47.496532,
+      -10.3454
+    ]
+  },
+  {
+    "codigo_ibge": "1712009",
+    "nome": "Lajeado",
+    "ponto": [
+      -48.287114,
+      -9.8325
+    ]
+  },
+  {
+    "codigo_ibge": "1712157",
+    "nome": "Lavandeira",
+    "ponto": [
+      -46.35288,
+      -12.8208
+    ]
+  },
+  {
+    "codigo_ibge": "1712405",
+    "nome": "Lizarda",
+    "ponto": [
+      -46.827686,
+      -9.49615
+    ]
+  },
+  {
+    "codigo_ibge": "1712454",
+    "nome": "Luzinópolis",
+    "ponto": [
+      -47.851019,
+      -6.21045
+    ]
+  },
+  {
+    "codigo_ibge": "1712504",
+    "nome": "Marianópolis do Tocantins",
+    "ponto": [
+      -49.759044,
+      -9.77125
+    ]
+  },
+  {
+    "codigo_ibge": "1712702",
+    "nome": "Mateiros",
+    "ponto": [
+      -46.52283,
+      -10.70925
+    ]
+  },
+  {
+    "codigo_ibge": "1712801",
+    "nome": "Maurilândia do Tocantins",
+    "ponto": [
+      -47.571429,
+      -6.02155
+    ]
+  },
+  {
+    "codigo_ibge": "1713205",
+    "nome": "Miracema do Tocantins",
+    "ponto": [
+      -48.613632,
+      -9.71875
+    ]
+  },
+  {
+    "codigo_ibge": "1713304",
+    "nome": "Miranorte",
+    "ponto": [
+      -48.667695,
+      -9.39355
+    ]
+  },
+  {
+    "codigo_ibge": "1713601",
+    "nome": "Monte do Carmo",
+    "ponto": [
+      -48.02299,
+      -10.7366
+    ]
+  },
+  {
+    "codigo_ibge": "1713700",
+    "nome": "Monte Santo do Tocantins",
+    "ponto": [
+      -49.114046,
+      -9.98625
+    ]
+  },
+  {
+    "codigo_ibge": "1713809",
+    "nome": "Palmeiras do Tocantins",
+    "ponto": [
+      -47.655069,
+      -6.5862
+    ]
+  },
+  {
+    "codigo_ibge": "1713957",
+    "nome": "Muricilândia",
+    "ponto": [
+      -48.769608,
+      -7.01765
+    ]
+  },
+  {
+    "codigo_ibge": "1714203",
+    "nome": "Natividade",
+    "ponto": [
+      -47.625961,
+      -11.72775
+    ]
+  },
+  {
+    "codigo_ibge": "1714302",
+    "nome": "Nazaré",
+    "ponto": [
+      -47.78064,
+      -6.32675
+    ]
+  },
+  {
+    "codigo_ibge": "1714880",
+    "nome": "Nova Olinda",
+    "ponto": [
+      -48.346244,
+      -7.65285
+    ]
+  },
+  {
+    "codigo_ibge": "1715002",
+    "nome": "Nova Rosalândia",
+    "ponto": [
+      -49.000856,
+      -10.5249
+    ]
+  },
+  {
+    "codigo_ibge": "1715101",
+    "nome": "Novo Acordo",
+    "ponto": [
+      -47.203306,
+      -10.16135
+    ]
+  },
+  {
+    "codigo_ibge": "1715150",
+    "nome": "Novo Alegre",
+    "ponto": [
+      -46.581934,
+      -12.8886
+    ]
+  },
+  {
+    "codigo_ibge": "1715259",
+    "nome": "Novo Jardim",
+    "ponto": [
+      -46.654671,
+      -11.80735
+    ]
+  },
+  {
+    "codigo_ibge": "1715507",
+    "nome": "Oliveira de Fátima",
+    "ponto": [
+      -48.877725,
+      -10.66025
+    ]
+  },
+  {
+    "codigo_ibge": "1715705",
+    "nome": "Palmeirante",
+    "ponto": [
+      -48.176443,
+      -7.8459
+    ]
+  },
+  {
+    "codigo_ibge": "1715754",
+    "nome": "Palmeirópolis",
+    "ponto": [
+      -48.330508,
+      -13.03225
+    ]
+  },
+  {
+    "codigo_ibge": "1716109",
+    "nome": "Paraíso do Tocantins",
+    "ponto": [
+      -48.866489,
+      -10.2152
+    ]
+  },
+  {
+    "codigo_ibge": "1716208",
+    "nome": "Paranã",
+    "ponto": [
+      -47.787564,
+      -12.75335
+    ]
+  },
+  {
+    "codigo_ibge": "1716307",
+    "nome": "Pau D'Arco",
+    "ponto": [
+      -48.997093,
+      -7.5527
+    ]
+  },
+  {
+    "codigo_ibge": "1716505",
+    "nome": "Pedro Afonso",
+    "ponto": [
+      -48.003415,
+      -9.2002
+    ]
+  },
+  {
+    "codigo_ibge": "1716604",
+    "nome": "Peixe",
+    "ponto": [
+      -48.586109,
+      -11.93195
+    ]
+  },
+  {
+    "codigo_ibge": "1716653",
+    "nome": "Pequizeiro",
+    "ponto": [
+      -48.912458,
+      -8.39675
+    ]
+  },
+  {
+    "codigo_ibge": "1716703",
+    "nome": "Colméia",
+    "ponto": [
+      -48.724287,
+      -8.89685
+    ]
+  },
+  {
+    "codigo_ibge": "1717008",
+    "nome": "Pindorama do Tocantins",
+    "ponto": [
+      -47.580867,
+      -11.1984
+    ]
+  },
+  {
+    "codigo_ibge": "1717206",
+    "nome": "Piraquê",
+    "ponto": [
+      -48.253326,
+      -6.7176
+    ]
+  },
+  {
+    "codigo_ibge": "1717503",
+    "nome": "Pium",
+    "ponto": [
+      -50.022893,
+      -9.94405
+    ]
+  },
+  {
+    "codigo_ibge": "1717800",
+    "nome": "Ponte Alta do Bom Jesus",
+    "ponto": [
+      -46.577111,
+      -12.07075
+    ]
+  },
+  {
+    "codigo_ibge": "1717909",
+    "nome": "Ponte Alta do Tocantins",
+    "ponto": [
+      -47.361709,
+      -10.75425
+    ]
+  },
+  {
+    "codigo_ibge": "1718006",
+    "nome": "Porto Alegre do Tocantins",
+    "ponto": [
+      -47.06785,
+      -11.5506
+    ]
+  },
+  {
+    "codigo_ibge": "1718204",
+    "nome": "Porto Nacional",
+    "ponto": [
+      -48.557134,
+      -10.557
+    ]
+  },
+  {
+    "codigo_ibge": "1718303",
+    "nome": "Praia Norte",
+    "ponto": [
+      -47.784888,
+      -5.48865
+    ]
+  },
+  {
+    "codigo_ibge": "1718402",
+    "nome": "Presidente Kennedy",
+    "ponto": [
+      -48.477417,
+      -8.4636
+    ]
+  },
+  {
+    "codigo_ibge": "1718451",
+    "nome": "Pugmil",
+    "ponto": [
+      -48.861354,
+      -10.4195
+    ]
+  },
+  {
+    "codigo_ibge": "1718501",
+    "nome": "Recursolândia",
+    "ponto": [
+      -47.111626,
+      -8.69745
+    ]
+  },
+  {
+    "codigo_ibge": "1718550",
+    "nome": "Riachinho",
+    "ponto": [
+      -48.087161,
+      -6.475
+    ]
+  },
+  {
+    "codigo_ibge": "1718659",
+    "nome": "Rio da Conceição",
+    "ponto": [
+      -46.729108,
+      -11.3075
+    ]
+  },
+  {
+    "codigo_ibge": "1718709",
+    "nome": "Rio dos Bois",
+    "ponto": [
+      -48.447235,
+      -9.2366
+    ]
+  },
+  {
+    "codigo_ibge": "1718758",
+    "nome": "Rio Sono",
+    "ponto": [
+      -47.4902,
+      -9.64345
+    ]
+  },
+  {
+    "codigo_ibge": "1718808",
+    "nome": "Sampaio",
+    "ponto": [
+      -47.907339,
+      -5.3352
+    ]
+  },
+  {
+    "codigo_ibge": "1718840",
+    "nome": "Sandolândia",
+    "ponto": [
+      -49.855202,
+      -12.3808
+    ]
+  },
+  {
+    "codigo_ibge": "1718865",
+    "nome": "Santa Fé do Araguaia",
+    "ponto": [
+      -49.045589,
+      -7.04425
+    ]
+  },
+  {
+    "codigo_ibge": "1718881",
+    "nome": "Santa Maria do Tocantins",
+    "ponto": [
+      -47.898413,
+      -8.80165
+    ]
+  },
+  {
+    "codigo_ibge": "1718899",
+    "nome": "Santa Rita do Tocantins",
+    "ponto": [
+      -49.319249,
+      -10.96505
+    ]
+  },
+  {
+    "codigo_ibge": "1718907",
+    "nome": "Santa Rosa do Tocantins",
+    "ponto": [
+      -48.140406,
+      -11.41025
+    ]
+  },
+  {
+    "codigo_ibge": "1719004",
+    "nome": "Santa Tereza do Tocantins",
+    "ponto": [
+      -47.747084,
+      -10.2909
+    ]
+  },
+  {
+    "codigo_ibge": "1720002",
+    "nome": "Santa Terezinha do Tocantins",
+    "ponto": [
+      -47.765119,
+      -6.48505
+    ]
+  },
+  {
+    "codigo_ibge": "1720101",
+    "nome": "São Bento do Tocantins",
+    "ponto": [
+      -47.796549,
+      -5.9528
+    ]
+  },
+  {
+    "codigo_ibge": "1720150",
+    "nome": "São Félix do Tocantins",
+    "ponto": [
+      -46.752751,
+      -10.0412
+    ]
+  },
+  {
+    "codigo_ibge": "1720200",
+    "nome": "São Miguel do Tocantins",
+    "ponto": [
+      -47.565969,
+      -5.5452
+    ]
+  },
+  {
+    "codigo_ibge": "1720259",
+    "nome": "São Salvador do Tocantins",
+    "ponto": [
+      -48.348748,
+      -12.53695
+    ]
+  },
+  {
+    "codigo_ibge": "1720309",
+    "nome": "São Sebastião do Tocantins",
+    "ponto": [
+      -48.32079,
+      -5.2435
+    ]
+  },
+  {
+    "codigo_ibge": "1720499",
+    "nome": "São Valério",
+    "ponto": [
+      -48.230521,
+      -11.76875
+    ]
+  },
+  {
+    "codigo_ibge": "1720655",
+    "nome": "Silvanópolis",
+    "ponto": [
+      -48.220168,
+      -11.1125
+    ]
+  },
+  {
+    "codigo_ibge": "1720804",
+    "nome": "Sítio Novo do Tocantins",
+    "ponto": [
+      -47.656994,
+      -5.65245
+    ]
+  },
+  {
+    "codigo_ibge": "1720853",
+    "nome": "Sucupira",
+    "ponto": [
+      -48.855785,
+      -12.0879
+    ]
+  },
+  {
+    "codigo_ibge": "1720903",
+    "nome": "Taguatinga",
+    "ponto": [
+      -46.616409,
+      -12.34835
+    ]
+  },
+  {
+    "codigo_ibge": "1720937",
+    "nome": "Taipas do Tocantins",
+    "ponto": [
+      -46.979274,
+      -12.15315
+    ]
+  },
+  {
+    "codigo_ibge": "1720978",
+    "nome": "Talismã",
+    "ponto": [
+      -49.060465,
+      -12.67355
+    ]
+  },
+  {
+    "codigo_ibge": "1721000",
+    "nome": "Palmas",
+    "ponto": [
+      -48.109072,
+      -10.18425
+    ]
+  },
+  {
+    "codigo_ibge": "1721109",
+    "nome": "Tocantínia",
+    "ponto": [
+      -48.161322,
+      -9.61795
+    ]
+  },
+  {
+    "codigo_ibge": "1721208",
+    "nome": "Tocantinópolis",
+    "ponto": [
+      -47.554028,
+      -6.2402
+    ]
+  },
+  {
+    "codigo_ibge": "1721257",
+    "nome": "Tupirama",
+    "ponto": [
+      -48.281962,
+      -8.9404
+    ]
+  },
+  {
+    "codigo_ibge": "1721307",
+    "nome": "Tupiratins",
+    "ponto": [
+      -48.197878,
+      -8.3544
+    ]
+  },
+  {
+    "codigo_ibge": "1722081",
+    "nome": "Wanderlândia",
+    "ponto": [
+      -47.991352,
+      -6.8824
+    ]
+  },
+  {
+    "codigo_ibge": "1722107",
+    "nome": "Xambioá",
+    "ponto": [
+      -48.475641,
+      -6.60105
+    ]
+  }
+]
