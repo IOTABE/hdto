@@ -172,3 +172,36 @@ git pull
 - Consentimento imutável também no banco (trigger PostgreSQL).
 - Revisar `DEBUG=False` e segredos fora do repositório.
 - Rotacionar `SECRET_KEY` exige reautenticação; rotação de `FIELD_ENCRYPTION_KEY` exige migração de dados.
+
+
+root@vmi1731375:/www/wwwroot/hdto# docker compose -f docker-compose.prod.yml run --rm   -v /tmp/pa_geo.json:/tmp/pa_geo.json:ro   web python manage.py importar_municipios_to   --arquivo /tmp/pa_geo.json --uf PA 2>&1
+Container hdto-web-run-585ff0e85020 Creating 
+Container hdto-web-run-585ff0e85020 Created 
+Operations to perform:
+  Apply all migrations: accounts, admin, auth, captcha, census, content, contenttypes, events, geo, institutions, members, sessions
+Running migrations:
+  No migrations to apply.
+
+171 static files copied to '/app/staticfiles', 487 post-processed.
+CommandError: Não foi possível ler o arquivo: [Errno 21] Is a directory: '/tmp/pa_geo.json' 
++ Thought: 3.3s
+O Docker criou um diretório em /tmp/pa_geo.json porque o arquivo não existia no servidor (ele só existe na sua máquina). O -v cria a pasta automaticamente.
+Baixe o arquivo no servidor e rode de novo:
+rmdir /tmp/pa_geo.json   # falha se não for o diretório vazio criado pelo Docker
+
+curl -sL "https://servicodados.ibge.gov.br/api/v3/malhas/estados/PA?formato=application/vnd.geo+json&qualidade=intermediaria&intrarregiao=municipio" \
+  -o /tmp/pa_geo.json
+
+ls -l /tmp/pa_geo.json   # deve ser um arquivo ~750 KB
+
+docker compose -f docker-compose.prod.yml run --rm \
+  -v /tmp/pa_geo.json:/tmp/pa_geo.json:ro \
+  web python manage.py importar_municipios_to \
+  --arquivo /tmp/pa_geo.json --uf PA
+Para o Maranhão, troque PA por MA (217 municípios) e o nome do arquivo.
+Se preferir enviar da sua máquina em vez de baixar no servidor:
+scp /tmp/opencode/pa_geo.json root@SEU_SERVIDOR:/tmp/pa_geo.json
+Depois confirme com:
+docker compose -f docker-compose.prod.yml exec web python manage.py shell -c \
+"from apps.geo.models import Municipio; print(list(Municipio.objects.values('uf').annotate(...)))"
+▣  Build · DeepSeek V4.1 Flash 1017 · 8.5s
