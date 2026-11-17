@@ -9,12 +9,17 @@ class InscricaoInline(admin.TabularInline):
     readonly_fields = ["token", "checkin_em"]
 
 
+class EventoArquivoInline(admin.TabularInline):
+    model = EventoArquivo
+    extra = 1
+
+
 @admin.register(Evento)
 class EventoAdmin(admin.ModelAdmin):
     list_display = ["titulo", "tipo", "abrangencia", "inicio", "fim", "inscricoes_abertas"]
     list_filter = ["tipo", "abrangencia", "inscricoes_abertas"]
     search_fields = ["titulo", "local_nome"]
-    inlines = [InscricaoInline]
+    inlines = [EventoArquivoInline, InscricaoInline]
 
 
 @admin.register(Inscricao)

@@ -73,6 +73,17 @@ class Evento(TimeStampedModel):
     def esta_aberto(self):
         return self.inscricoes_abertas and self.fim >= timezone.now()
 
+    @property
+    def imagem_card(self):
+        """Banner do evento ou, na falta dele, o primeiro arquivo de imagem anexado."""
+        if self.banner:
+            return self.banner
+        extensoes = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg")
+        for anexo in self.arquivos.all():
+            if (anexo.arquivo.name or "").lower().endswith(extensoes):
+                return anexo.arquivo
+        return None
+
 
 class Inscricao(TimeStampedModel):
     class Status(db_models.TextChoices):

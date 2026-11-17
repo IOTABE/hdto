@@ -18,6 +18,21 @@
     {% endif %}
     <div class="prose">{{ evento.descricao|linebreaks }}</div>
 
+    {% with arquivos=evento.arquivos.all %}
+      {% if arquivos %}
+        <section class="event-files">
+          <h2>Arquivos do evento</h2>
+          <ul>
+            {% for anexo in arquivos %}
+              <li>
+                <a href="{{ anexo.arquivo.url }}" target="_blank" rel="noopener">{{ anexo.titulo }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% endwith %}
+
     <div class="button-row">
       {% if evento.esta_aberto %}
         {% if user.is_authenticated %}

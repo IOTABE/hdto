@@ -21,16 +21,25 @@
     </div>
     <div class="card-grid">
       {% for evento in proximos_eventos %}
-        <article class="glass-card event-card">
-          <div class="event-card__date">
-            <span>{{ evento.inicio|date:"d" }}</span>
-            <small>{{ evento.inicio|date:"M" }}</small>
-          </div>
-          <div>
-            <h3><a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a></h3>
-            <p class="meta">{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}</p>
-          </div>
-        </article>
+        {% with imagem=evento.imagem_card %}
+          <article class="glass-card event-card{% if imagem %} event-card--media{% endif %}">
+            {% if imagem %}
+              <a class="event-card__media" href="{% url 'evento-detalhe' evento.pk %}">
+                <img src="{{ imagem.url }}" alt="{{ evento.titulo }}" loading="lazy">
+              </a>
+            {% endif %}
+            <div class="event-card__body">
+              <div class="event-card__date">
+                <span>{{ evento.inicio|date:"d" }}</span>
+                <small>{{ evento.inicio|date:"M" }}</small>
+              </div>
+              <div>
+                <h3><a href="{% url 'evento-detalhe' evento.pk %}">{{ evento.titulo }}</a></h3>
+                <p class="meta">{{ evento.inicio|date:"d/m/Y H:i" }}{% if evento.local_nome %} · {{ evento.local_nome }}{% endif %}</p>
+              </div>
+            </div>
+          </article>
+        {% endwith %}
       {% empty %}
         <p class="glass-card empty-state">Nenhum evento programado.</p>
       {% endfor %}

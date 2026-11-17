@@ -33,7 +33,11 @@ from .models import (
 
 def home(request):
     noticias = Noticia.objects.filter(publicada=True).order_by("-publicada_em", "-created_at")[:3]
-    proximos_eventos = Evento.objects.filter(fim__gte=timezone.now()).order_by("inicio")[:3]
+    proximos_eventos = (
+        Evento.objects.filter(fim__gte=timezone.now())
+        .prefetch_related("arquivos")
+        .order_by("inicio")[:3]
+    )
     paginas = PaginaInstitucional.objects.filter(publicada=True)[:6]
     return render(
         request,

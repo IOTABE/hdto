@@ -18,7 +18,11 @@ from .models import Evento, Inscricao
 
 
 def evento_lista(request):
-    eventos = Evento.objects.filter(fim__gte=timezone.now()).order_by("inicio")
+    eventos = (
+        Evento.objects.filter(fim__gte=timezone.now())
+        .prefetch_related("arquivos")
+        .order_by("inicio")
+    )
     return render(request, "events/evento_lista.html", {"eventos": eventos})
 
 
