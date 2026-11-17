@@ -14,6 +14,19 @@
   const cluster = L.markerClusterGroup();
   map.addLayer(cluster);
 
+  const svgIgreja = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44">
+      <path fill="#1e3a5f" stroke="#ffffff" stroke-width="2"
+        d="M16 1C8.3 1 2 7.3 2 15c0 10 14 27 14 27s14-17 14-27C30 7.3 23.7 1 16 1z"/>
+      <path fill="#ffffff" d="M15 8h2v4h4v2h-4v9h-2v-9h-4v-2h4z"/>
+    </svg>`;
+  const iconeIgreja = L.icon({
+    iconUrl: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgIgreja),
+    iconSize: [32, 44],
+    iconAnchor: [16, 42],
+    popupAnchor: [0, -38],
+  });
+
   function popup(ponto) {
     const organizacoes = (ponto.organizacoes || [])
       .map((org) => `<li>${org.tipo}${org.dia ? " — " + org.dia : ""}</li>`)
@@ -37,7 +50,13 @@
       const dados = await resposta.json();
       cluster.clearLayers();
       dados.pontos.forEach((ponto) => {
-        cluster.addLayer(L.marker([ponto.lat, ponto.lng]).bindPopup(popup(ponto)));
+        cluster.addLayer(
+          L.marker([ponto.lat, ponto.lng], {
+            icon: iconeIgreja,
+            alt: ponto.nome,
+            title: ponto.nome,
+          }).bindPopup(popup(ponto))
+        );
       });
       if (dados.pontos.length) map.fitBounds(cluster.getBounds().pad(0.15));
       status.textContent = `${dados.total} congregação(ões) encontrada(s).`;
