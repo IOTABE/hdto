@@ -19,6 +19,9 @@
 
     <div class="button-row">
       <a class="btn btn--outlined" href="{% url 'noticia-lista' %}">Ver todas as notícias</a>
+      {% if pode_gerir_conteudo %}
+        <a class="btn btn--filled" href="{% url 'noticia-editar' noticia.pk %}">Editar notícia</a>
+      {% endif %}
     </div>
   </article>
 {% endblock %}

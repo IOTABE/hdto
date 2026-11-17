@@ -7,6 +7,9 @@
       <h1>Notícias</h1>
       <p class="subtitle">Acompanhe as ações e novidades do trabalho masculino no Tocantins.</p>
     </div>
+    {% if pode_gerir_conteudo %}
+      <a class="btn btn--filled" href="{% url 'noticia-nova' %}">Nova notícia</a>
+    {% endif %}
   </header>
 
   <ul class="card-list">

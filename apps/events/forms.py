@@ -6,7 +6,37 @@ from apps.core.forms import MaterialFormMixin
 from apps.members.models import Membro
 from apps.members.scoping import membros_visiveis
 
-from .models import Inscricao
+from .models import Evento, Inscricao
+
+
+class EventoForm(MaterialFormMixin, forms.ModelForm):
+    class Meta:
+        model = Evento
+        fields = [
+            "titulo",
+            "tipo",
+            "abrangencia",
+            "associacao",
+            "igreja",
+            "inicio",
+            "fim",
+            "local_nome",
+            "endereco",
+            "descricao",
+            "banner",
+            "capacidade",
+            "inscricoes_abertas",
+        ]
+        widgets = {
+            "inicio": forms.DateTimeInput(
+                format="%Y-%m-%dT%H:%M", attrs={"type": "datetime-local"}
+            ),
+            "fim": forms.DateTimeInput(
+                format="%Y-%m-%dT%H:%M", attrs={"type": "datetime-local"}
+            ),
+            "descricao": forms.Textarea(attrs={"rows": 6}),
+            "endereco": forms.TextInput(attrs={"autocomplete": "street-address"}),
+        }
 
 
 class InscricaoForm(MaterialFormMixin, forms.Form):

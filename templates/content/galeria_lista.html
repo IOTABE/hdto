@@ -7,6 +7,9 @@
       <h1>Galerias</h1>
       <p class="subtitle">Registros dos encontros, congressos e ações das organizações.</p>
     </div>
+    {% if pode_gerir_conteudo %}
+      <a class="btn btn--filled" href="{% url 'galeria-nova' %}">Nova galeria</a>
+    {% endif %}
   </header>
 
   <ul class="card-list">

@@ -1,3 +1,4 @@
+from apps.accounts.permissions import pode_gerir_conteudo
 from apps.accounts.roles import Role
 
 
@@ -12,5 +13,6 @@ def navigation(request):
         tem_membro = getattr(user, "membro", None) is not None
     return {
         "pode_gerir_cadastros": pode_gerir,
+        "pode_gerir_conteudo": pode_gerir_conteudo(user),
         "tem_membro": tem_membro,
     }

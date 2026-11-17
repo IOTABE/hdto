@@ -528,3 +528,15 @@ p { margin: 0 0 0.9rem; }
 @media (max-width: 900px) {
   .split-grid { grid-template-columns: 1fr; }
 }
+
+/* Ações compactas em listas de gestão */
+.inline-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: flex-end; }
+
+/* Rótulos flutuantes para campos nativos de arquivo e data/hora */
+.field:has(input[type="file"]) > label,
+.field:has(input[type="date"]) > label,
+.field:has(input[type="datetime-local"]) > label,
+.field:has(input[type="time"]) > label {
+  top: 0.42rem; font-size: 0.7rem; letter-spacing: 0.03em;
+  color: var(--primary-600); font-weight: 600;
+}

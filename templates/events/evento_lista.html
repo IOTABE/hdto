@@ -7,6 +7,9 @@
       <h1>Eventos</h1>
       <p class="subtitle">Congressos, acampamentos, simpósios e ações missionárias.</p>
     </div>
+    {% if pode_gerir_conteudo %}
+      <a class="btn btn--filled" href="{% url 'evento-novo' %}">Novo evento</a>
+    {% endif %}
   </header>
 
   <div class="card-grid">

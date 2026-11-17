@@ -34,6 +34,9 @@
         <span class="chip">Inscrições encerradas</span>
       {% endif %}
       <a class="btn btn--outlined" href="{% url 'evento-ics' evento.pk %}">Adicionar à agenda</a>
+      {% if pode_gerir_conteudo %}
+        <a class="btn btn--outlined" href="{% url 'evento-editar' evento.pk %}">Editar evento</a>
+      {% endif %}
     </div>
   </article>
 {% endblock %}

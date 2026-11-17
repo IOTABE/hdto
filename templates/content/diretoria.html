@@ -8,6 +8,9 @@
       <h1>Diretoria</h1>
       <p class="subtitle">Composição da diretoria por biênio.</p>
     </div>
+    {% if pode_gerir_conteudo %}
+      <a class="btn btn--filled" href="{% url 'diretor-novo' %}">Novo membro</a>
+    {% endif %}
   </header>
 
   {% for grupo in grupos %}
@@ -31,6 +34,12 @@
                 {% if membro.email and membro.telefone %} · {% endif %}
                 {% if membro.telefone %}{{ membro.telefone }}{% endif %}
               </p>
+            {% endif %}
+            {% if pode_gerir_conteudo %}
+              <div class="inline-actions">
+                <a class="btn btn--text btn--sm" href="{% url 'diretor-editar' membro.pk %}">Editar</a>
+                <a class="btn btn--text btn--sm" href="{% url 'diretor-excluir' membro.pk %}">Excluir</a>
+              </div>
             {% endif %}
           </article>
         {% endfor %}

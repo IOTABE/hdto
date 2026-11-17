@@ -35,6 +35,9 @@
         {% if pode_gerir_cadastros %}
           <a href="{% url 'dashboard' %}">Painel</a>
         {% endif %}
+        {% if pode_gerir_conteudo %}
+          <a href="{% url 'conteudo-painel' %}">Conteúdo</a>
+        {% endif %}
         <details class="nav-menu">
           <summary class="nav-menu__trigger">
             Institucional

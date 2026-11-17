@@ -8,6 +8,9 @@
       <h1>História</h1>
       <p class="subtitle">A trajetória do trabalho masculino batista no Tocantins.</p>
     </div>
+    {% if pode_gerir_conteudo %}
+      <a class="btn btn--filled" href="{% url 'historia-nova' %}">Novo conteúdo</a>
+    {% endif %}
   </header>
 
   <div class="content-stack">
@@ -23,6 +26,12 @@
           <img class="article-cover" src="{{ registro.imagem.url }}" alt="{{ registro.titulo }}" loading="lazy">
         {% endif %}
         <div class="prose">{{ registro.conteudo|linebreaks }}</div>
+        {% if pode_gerir_conteudo %}
+          <div class="inline-actions">
+            <a class="btn btn--text btn--sm" href="{% url 'historia-editar' registro.pk %}">Editar</a>
+            <a class="btn btn--text btn--sm" href="{% url 'historia-excluir' registro.pk %}">Excluir</a>
+          </div>
+        {% endif %}
       </article>
     {% empty %}
       <p class="glass-card empty-state">Nenhum conteúdo de história publicado.</p>

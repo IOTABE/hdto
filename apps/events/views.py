@@ -10,10 +10,10 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
-from apps.accounts.permissions import role_required
+from apps.accounts.permissions import conteudo_required, role_required
 from apps.accounts.roles import Role
 
-from .forms import InscricaoForm
+from .forms import EventoForm, InscricaoForm
 from .models import Evento, Inscricao
 
 
@@ -129,4 +129,67 @@ def checkin(request, token):
             "evento": inscricao.evento.titulo,
             "checkin_em": inscricao.checkin_em,
         }
+    )
+
+
+@conteudo_required
+def evento_novo(request):
+    form = EventoForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        evento = form.save()
+        messages.success(request, f"Evento “{evento.titulo}” salvo com sucesso.")
+        return redirect("evento-detalhe", pk=evento.pk)
+    return render(
+        request,
+        "content/editor_form.html",
+        {
+            "form": form,
+            "titulo": "Novo evento",
+            "subtitulo": "Cadastre um congresso, acampamento, simpósio ou ação.",
+            "cancel_url": reverse("evento-lista"),
+            "submit_label": "Salvar evento",
+        },
+    )
+
+
+@conteudo_required
+def evento_editar(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    form = EventoForm(
+        request.POST or None, request.FILES or None, instance=evento
+    )
+    if request.method == "POST" and form.is_valid():
+        evento = form.save()
+        messages.success(request, f"Evento “{evento.titulo}” atualizado.")
+        return redirect("evento-detalhe", pk=evento.pk)
+    return render(
+        request,
+        "content/editor_form.html",
+        {
+            "form": form,
+            "titulo": "Editar evento",
+            "subtitulo": evento.titulo,
+            "cancel_url": reverse("evento-detalhe", args=[evento.pk]),
+            "submit_label": "Salvar alterações",
+        },
+    )
+
+
+@conteudo_required
+def evento_excluir(request, pk):
+    evento = get_object_or_404(Evento, pk=pk)
+    if request.method == "POST":
+        titulo = evento.titulo
+        evento.delete()
+        messages.success(request, f"Evento “{titulo}” excluído.")
+        return redirect("evento-lista")
+    return render(
+        request,
+        "content/confirmar_exclusao.html",
+        {
+            "objeto": evento,
+            "titulo": "Excluir evento",
+            "descricao": f"Tem certeza de que deseja excluir “{evento.titulo}”?",
+            "cancel_url": reverse("evento-detalhe", args=[evento.pk]),
+        },
     )

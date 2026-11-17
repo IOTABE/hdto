@@ -8,7 +8,13 @@
       <h1>{{ galeria.titulo }}</h1>
       {% if galeria.descricao %}<p class="subtitle">{{ galeria.descricao }}</p>{% endif %}
     </div>
-    <a class="btn btn--outlined btn--sm" href="{% url 'galeria-lista' %}">Voltar às galerias</a>
+    <div class="button-row">
+      {% if pode_gerir_conteudo %}
+        <a class="btn btn--filled btn--sm" href="{% url 'foto-nova' galeria.slug %}">Adicionar foto</a>
+        <a class="btn btn--outlined btn--sm" href="{% url 'galeria-editar' galeria.slug %}">Editar galeria</a>
+      {% endif %}
+      <a class="btn btn--outlined btn--sm" href="{% url 'galeria-lista' %}">Voltar às galerias</a>
+    </div>
   </header>
 
   <div class="galeria">
@@ -16,6 +22,12 @@
       <figure>
         <img src="{{ foto.imagem.url }}" alt="{{ foto.legenda }}" loading="lazy">
         {% if foto.legenda %}<figcaption>{{ foto.legenda }}</figcaption>{% endif %}
+        {% if pode_gerir_conteudo %}
+          <div class="inline-actions">
+            <a class="btn btn--text btn--sm" href="{% url 'foto-editar' foto.pk %}">Editar</a>
+            <a class="btn btn--text btn--sm" href="{% url 'foto-excluir' foto.pk %}">Excluir</a>
+          </div>
+        {% endif %}
       </figure>
     {% empty %}
       <p class="glass-card empty-state">Nenhuma foto nesta galeria.</p>

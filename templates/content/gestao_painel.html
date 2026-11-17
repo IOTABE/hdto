@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}Gestão de conteúdo — HB-TO{% endblock %}
+{% block content %}
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Área restrita</p>
+      <h1>Gestão de conteúdo</h1>
+      <p class="subtitle">
+        Inclua notícias, eventos, fotos, história e diretoria. Os botões de gestão
+        aparecem somente para os perfis autorizados.
+      </p>
+    </div>
+    <a class="btn btn--outlined" href="{% url 'home' %}">Ver portal</a>
+  </header>
+
+  <div class="split-grid">
+    <section class="glass-card">
+      <div class="section-head">
+        <h2>Notícias</h2>
+        <a class="btn btn--filled btn--sm" href="{% url 'noticia-nova' %}">Nova notícia</a>
+      </div>
+      <ul class="plain-list">
+        {% for noticia in noticias %}
+          <li>
+            <span>
+              <strong>{{ noticia.titulo }}</strong><br>
+              {% if noticia.publicada %}
+                <span class="chip chip--success">Publicada</span>
+              {% else %}
+                <span class="chip">Rascunho</span>
+              {% endif %}
+            </span>
+            <span class="inline-actions">
+              <a class="btn btn--text btn--sm" href="{% url 'noticia-editar' noticia.pk %}">Editar</a>
+              <a class="btn btn--text btn--sm" href="{% url 'noticia-excluir' noticia.pk %}">Excluir</a>
+            </span>
+          </li>
+        {% empty %}
+          <li>Nenhuma notícia cadastrada.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="glass-card">
+      <div class="section-head">
+        <h2>Eventos</h2>
+        <a class="btn btn--filled btn--sm" href="{% url 'evento-novo' %}">Novo evento</a>
+      </div>
+      <ul class="plain-list">
+        {% for evento in eventos %}
+          <li>
+            <span>
+              <strong>{{ evento.titulo }}</strong><br>
+              <span class="meta">{{ evento.inicio|date:"d/m/Y H:i" }}</span>
+            </span>
+            <span class="inline-actions">
+              <a class="btn btn--text btn--sm" href="{% url 'evento-editar' evento.pk %}">Editar</a>
+              <a class="btn btn--text btn--sm" href="{% url 'evento-excluir' evento.pk %}">Excluir</a>
+            </span>
+          </li>
+        {% empty %}
+          <li>Nenhum evento cadastrado.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="glass-card">
+      <div class="section-head">
+        <h2>Galerias e fotos</h2>
+        <a class="btn btn--filled btn--sm" href="{% url 'galeria-nova' %}">Nova galeria</a>
+      </div>
+      <ul class="plain-list">
+        {% for galeria in galerias %}
+          <li>
+            <span>
+              <strong>{{ galeria.titulo }}</strong><br>
+              <span class="meta">
+                {{ galeria.fotos.count }} foto{{ galeria.fotos.count|pluralize }}
+                {% if not galeria.publicada %} · não publicada{% endif %}
+              </span>
+            </span>
+            <span class="inline-actions">
+              <a class="btn btn--text btn--sm" href="{% url 'foto-nova' galeria.slug %}">Adicionar foto</a>
+              <a class="btn btn--text btn--sm" href="{% url 'galeria-editar' galeria.slug %}">Editar</a>
+              <a class="btn btn--text btn--sm" href="{% url 'galeria-excluir' galeria.slug %}">Excluir</a>
+            </span>
+          </li>
+        {% empty %}
+          <li>Nenhuma galeria cadastrada.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="glass-card">
+      <div class="section-head">
+        <h2>História</h2>
+        <a class="btn btn--filled btn--sm" href="{% url 'historia-nova' %}">Novo conteúdo</a>
+      </div>
+      <ul class="plain-list">
+        {% for historia in historias %}
+          <li>
+            <span>
+              <strong>{{ historia.titulo }}</strong><br>
+              {% if historia.publicada %}
+                <span class="chip chip--success">Publicado</span>
+              {% else %}
+                <span class="chip">Rascunho</span>
+              {% endif %}
+            </span>
+            <span class="inline-actions">
+              <a class="btn btn--text btn--sm" href="{% url 'historia-editar' historia.pk %}">Editar</a>
+              <a class="btn btn--text btn--sm" href="{% url 'historia-excluir' historia.pk %}">Excluir</a>
+            </span>
+          </li>
+        {% empty %}
+          <li>Nenhum conteúdo de história cadastrado.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="glass-card">
+      <div class="section-head">
+        <h2>Diretoria</h2>
+        <a class="btn btn--filled btn--sm" href="{% url 'diretor-novo' %}">Novo membro</a>
+      </div>
+      <ul class="plain-list">
+        {% for membro in diretores %}
+          <li>
+            <span>
+              <strong>{{ membro.nome }}</strong><br>
+              <span class="meta">{{ membro.cargo }} · {{ membro.bienio }}</span>
+            </span>
+            <span class="inline-actions">
+              <a class="btn btn--text btn--sm" href="{% url 'diretor-editar' membro.pk %}">Editar</a>
+              <a class="btn btn--text btn--sm" href="{% url 'diretor-excluir' membro.pk %}">Excluir</a>
+            </span>
+          </li>
+        {% empty %}
+          <li>Nenhum membro da diretoria cadastrado.</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+{% endblock %}
